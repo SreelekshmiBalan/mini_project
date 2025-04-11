@@ -1,0 +1,77 @@
+{% extends 'home_nav.html' %}
+
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+<div>
+    <form action="">
+        <div>
+            <div><label for="">Full Name</label></div>
+            <div>
+                <div>
+                    <input type="text" name="first_name">
+                </div>
+                <div>
+                    <input type="text" name="last_name">
+                </div>
+            </div>
+            <div><label for="">Gender</label></div>
+            <div>
+                <select name="gender" id="">
+                    <option value="">Please select</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <div><label for="">Birth Date</label></div>
+            <div>
+                <input type="date" name="birth_date">
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <label for="">Email</label>
+                    </div>
+                    <div>
+                        <input type="text" name="email">
+                    </div>
+                </div>
+                <div>
+                    <label for="">Phone Number</label>
+                </div>
+                <div>
+                    <input type="text" name="phone">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="">Address</label>
+                </div>
+                <div>
+                    <input type="text" name="address_line1" placeholder="Door No, Street">
+                </div>
+                <div>
+                    <input type="text" name="address_line2" placeholder="City">
+                </div>
+                <div>
+                    <div>
+                        <input type="text" name="district" placeholder="District">
+                    </div>
+                    <div>
+                        <input type="text" name="state" placeholder="State">
+                    </div>
+                </div>
+                <div>
+                    <input type="text" name="Postal Code">
+                </div>
+            </div>
+        </div>
+        <div>
+            <a href=""><button>Submit</button></a>
+        </div>
+    </form>
+</div>
+{% endblock %}

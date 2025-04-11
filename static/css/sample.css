@@ -1,0 +1,12 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    color: #d63384;
+}
+
+.navbar-brand:hover {
+    color: #c2185b;
+}

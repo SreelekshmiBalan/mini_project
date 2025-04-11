@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <style>
+        .custom-navbar {
+    background-color: rgb(47, 12, 12);
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* soft bottom shadow */
+  }
+  .custom-navbar .navbar-brand,
+  .custom-navbar .nav > li > a {
+    color: #fcfcfc; /* dark text for white background */
+}
+.custom-navbar .nav > li > a:hover,
+.custom-navbar .nav > li.active > a {
+    color: #d3a31f; /* highlight color */
+    font-weight: bold;
+  }
+  .footer-link {
+  color: #aaa;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+.footer-link:hover {
+  color: #686666;;
+  text-decoration: underline;
+}
+.social-icon {
+  font-size: 18px;
+  color: #686666;
+  margin-right: 15px;
+  transition: all 0.3s ease;
+}
+.social-icon:hover {
+  color: #686666;
+}
+
+
+  </style>
+  {% block extra_css %}
+  {% endblock %}
+</head>
+<body>
+    <nav class="navbar custom-navbar">
+        <div class="container-fluid">
+          <div class="navbar-header" style="color: #fcfcfc; font-family: sans-serif ;">
+            <span style="display: flex; align-items: center;">
+              <img src="{% static 'images/Logo_w_bg.png' %}" alt="Logo" style="height: 160px; margin-right: 8px;">
+              THE GOLDEN HANGER
+            </span>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active" style="align-items: center; padding-top: 52px;"><a href="#">Home</a></li>
+            <li style="align-items: center; padding-top: 52px;"><a href="#">About</a></li>
+            <li style="align-items: center; padding-top: 52px;"><a href="#">Shop</a></li>
+            <li class="dropdown" style="align-items: center; padding-top: 52px;">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Shop by Category
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Casuals</a></li>
+                <li><a href="#">Salwar</a></li>
+                <li><a href="#">Sarees</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" action="/action_page.php">
+            <div class="input-group" style="align-items: center; padding-top: 50px; padding-left: 30px;">
+              <input type="text" class="form-control" placeholder="Search" style="width: 500px;">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                  <i class="glyphicon glyphicon-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-heart"></span> Wishlist</a></li>
+            <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+            <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      {% block content %}
+      {% endblock %}
+
+      <footer class="footer" style="background-color: #f0d7d7; color: #686666; padding: 60px 0;">
+        <div class="container">
+          <img src="{% static 'images/Logo_wo_bg.png' %}" alt="Logo" style="width: 120px;">
+          <div class="row">
+            <div class="col-sm-3">
+              <h4 style="color: #050505;">The Golden Hanger</h4>
+              <p style="color: #686666;">
+                The Golden Hanger is an online fashion brand
+              </p>
+              <div>
+                <p>
+                  <div class="d-flex text-light mb-3">
+                    <i class="fas fa-home pt-1"></i>
+                    <div>
+                      Golden Hanger<br>
+                      Pukkattuppady Road<br>
+                      Toll Junction, Edappally<br>
+                      Kochi, Kerala 682036
+                    </div>
+                  </div>
+                </p>
+                <p><i class="fas fa-phone" ></i>
+                  <div>
+                    9061721647
+                  </div></p>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <h5 style="color: #373737;">Discover</h5>
+              <ul class="list-unstyled">
+                <li><a href="{% url 'Home' %}" class="footer-link">Home</a></li>
+                <li><a href="#" class="footer-link">About Us</a></li>
+                <li><a href="#" class="footer-link">Portfolio</a></li>
+                <li><a href="#" class="footer-link">Services</a></li>
+                <li><a href="#" class="footer-link">Contact</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-2">
+              <h5 style="color: #373737;">About</h5>
+              <ul class="list-unstyled">
+                <li><a href="#" class="footer-link">Clients</a></li>
+                <li><a href="#" class="footer-link">Team</a></li>
+                <li><a href="#" class="footer-link">Career</a></li>
+                <li><a href="#" class="footer-link">Testimonials</a></li>
+                <li><a href="#" class="footer-link">Journal</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-2">
+              <h5 style="color: #373737;;">Help</h5>
+              <ul class="list-unstyled">
+                <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+                <li><a href="#" class="footer-link">Partners</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-3">
+              <h5 style="color: #373737;;">Follow Us</h5>
+              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
+              <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
+            </div>
+      
+          </div>
+        </div>
+      </footer>                  
+</body>
+</html>
