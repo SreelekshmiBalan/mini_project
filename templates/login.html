@@ -1,5 +1,5 @@
-{% load static %}
 {% extends 'login_nav.html' %}
+{% load static %}
 
 {% block extra_css %}
 <style>
@@ -10,12 +10,12 @@
 {% block content %}
     <div class="main">
         <div class="main1">
-            <form action="" method="post">
+            <form action="{% url 'login' %}" method="post">
                 <h2>USER SIGN-IN</h2>
                 <div><input type="text" placeholder="Username"></div>
                 <div><input type="text" placeholder="Password"></div>
                 <div><a href="">Forgot Password?</a></div>
-                <div><a href="login"><button>LOGIN</button></a></div>
+                <div><button>LOGIN</button></div>
                 <div><hr>OR<hr></div>
                 <div><a href="">Log in with Google</a></div>
                 <div>Don't Have an Account?<a href="">Sign Up</a></div>
@@ -24,7 +24,7 @@
         <div><img src="{% static 'images/InShot_20250410_100050248.jpg' %}" alt=""></div>
         {% if error %}
             {{ error }}
-            {% endif %}
+        {% endif %}
     </div>
 {% endblock %}
 

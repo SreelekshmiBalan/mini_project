@@ -18,14 +18,15 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from products_app import views
+from products_app import views as product_view
+from user_accounts_app import views as user_view
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
-    path('',views.LogHome,name='LogHome'),
-    path('home',views.Home,name='home'),
-    path('login',views.LogHome,name='login'),
+    path('',product_view.LogHome,name='LogHome'),
+    path('home',product_view.Home,name='home'),
+    path('login',user_view.LogPage,name='login'),
 ]
 if settings.DEBUG:
     urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
