@@ -1,124 +1,127 @@
-{% extends 'login_nav.html' %}
+{% extends 'home_nav.html' %}
 {% load static %}
 
 {% block extra_css %}
 
 <style>
-    .category-card {
-            /* width: 350px;
-            height: 400px; */
-            border: 1px solid #eee;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            transition: transform 0.7s;
-            text-align: center;
-        }
-        .category-card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .category-card img {
-            width: 250px;
-            height: 300px;
-            object-fit: cover;
-        }
-        .category-name {
-            font-size: 18px;
-            font-weight: 600;
-            padding: 15px 10px;
-            color: #333;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: block;
-            max-width: 100%;
-            cursor: pointer;
-        }
-        .caption1-1{
-          top: 150px;              
-          bottom: auto;            
-          left: 250px;              
-          right: auto;             
-          text-align:center;
-          font-family: Georgia, 'Times New Roman', Times, serif;
-          line-height: -10;
+  .category-card {
+          /* width: 350px;
+          height: 400px; */
+          border: 1px solid #eee;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+          transition: transform 0.7s;
+          text-align: center;
+      }
+      .category-card:hover {
+          transform: translateY(-7px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      .category-card img {
+          width: 250px;
+          height: 300px;
+          object-fit: cover;
+      }
+      .category-name {
+          font-size: 18px;
+          font-weight: 600;
+          padding: 15px 10px;
+          color: #333;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+          max-width: 100%;
+          cursor: pointer;
+      }
+      .caption1-1{
+        top: 150px;              
+        bottom: auto;            
+        left: 250px;              
+        right: auto;             
+        text-align:center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        line-height: -10;
 
 }
 .caption1-2{
-          top: 120px;              
-          bottom: auto;            
-          left: 1100px;              
-          right: auto;             
-          text-align:center;
-          font-family: Georgia, 'Times New Roman', Times, serif;
-          line-height: -10;
+        top: 120px;              
+        bottom: auto;            
+        left: 1100px;              
+        right: auto;             
+        text-align:center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        line-height: -10;
 
 }
 .caption2{
-          left: 460px;                       
-          right: auto;             
-          text-align:center;
-          font-family: Georgia, 'Times New Roman', Times, serif;
-          line-height: -10;
+        left: 460px;                       
+        right: auto;             
+        text-align:center;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        line-height: -10;
 
 }
 .buttonshop{
-            align-items: center;
-            appearance: none;
-            background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
-            border: 0;
-            border-radius: 6px;
-            box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
-            box-sizing: border-box;
-            color: #fff;
-            cursor: pointer;
-            display: inline-flex;
-            font-family: "JetBrains Mono",monospace;
-            height: 48px;
-            justify-content: center;
-            line-height: 1;
-            list-style: none;
-            overflow: hidden;
-            left: 100px;
-            position: relative;
-            text-align: left;
-            text-decoration: none;
-            transition: box-shadow .15s,transform .15s;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            white-space: nowrap;
-            will-change: box-shadow,transform;
-            font-size: 18px;
-            margin-bottom: 270px;
-            margin-right: 250px;
-          }
-          
-          .buttonshop:focus {
-            box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-          }
-          
-          .buttonshop:hover {
-            box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
-            transform: translateY(-2px);
-          }
-          
-          .buttonshop:active {
-            box-shadow: #3c4fe0 0 3px 7px inset;
-            transform: translateY(2px);
-          }
-        /* .category-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-        } */
+          align-items: center;
+          appearance: none;
+          background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+          border: 0;
+          border-radius: 6px;
+          box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+          box-sizing: border-box;
+          color: #fff;
+          cursor: pointer;
+          display: inline-flex;
+          font-family: "JetBrains Mono",monospace;
+          height: 48px;
+          justify-content: center;
+          line-height: 1;
+          list-style: none;
+          overflow: hidden;
+          left: 100px;
+          position: relative;
+          text-align: left;
+          text-decoration: none;
+          transition: box-shadow .15s,transform .15s;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          white-space: nowrap;
+          will-change: box-shadow,transform;
+          font-size: 18px;
+          margin-bottom: 270px;
+          margin-right: 250px;
+        }
+        
+        .buttonshop:focus {
+          box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+        }
+        
+        .buttonshop:hover {
+          box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+          transform: translateY(-2px);
+        }
+        
+        .buttonshop:active {
+          box-shadow: #3c4fe0 0 3px 7px inset;
+          transform: translateY(2px);
+        }
+      /* .category-card {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+      } */
 
 </style>
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+<p style="color: maroon; font-weight: bolder; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: x-large; padding-left: 10px; font-style: italic;">Hi, {{user.username}}</p>
+{% endif %}
 <div id="product-carousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -153,7 +156,7 @@
     <div class="item">
       <img src="{% static 'carousel_img/slide3.jpg' %}" alt="Slide 3" style="width:100%; height:500px; object-fit:cover;">
       <div class="carousel-caption caption3">
-        <a href=""><button class="buttonshop" role="button">Shop Now</button></a>
+        <a href="{% url 'shop' %}"><button class="buttonshop" role="button">Shop Now</button></a>
       </div>
     </div>
   </div>
@@ -176,8 +179,8 @@
         {% for product in products %}
         <div class="col-md-3">
             <div class="category-card">
-                <img src="{{ product.productimage_set.first.Image.url }}" alt="{{ product.Name }}">
-                <div class="category-name">{{ product.Name }}</div>
+                <img src="{{ product.images.first.Image.url }}" alt="{{ product.Name }}">
+                <a href="{% url 'productview' product.pk %}"><div class="category-name">{{ product.Name }}</div></a>
             </div>
         </div>
         {% endfor %}
@@ -191,7 +194,7 @@
         <div class="col-md-3">
             <div class="category-card">
                 <img src="{{ category.Category_Image.url }}" alt="{{ category.Category_Name }}">
-                <div class="category-name">{{ category.Category_Name }}</div>
+                <a href=""><div class="category-name">{{ category.Category_Name }}</div></a>
             </div>
         </div>
         {% endfor %}

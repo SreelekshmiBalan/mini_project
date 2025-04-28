@@ -66,11 +66,11 @@
             </span>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active" style="align-items: center; padding-top: 15px;"><a href="#">Home</a></li>
+            <li class="active" style="align-items: center; padding-top: 15px;"><a href="{% url 'LogHome' %}">Home</a></li>
             <li style="align-items: center; padding-top: 15px;"><a href="#">About</a></li>
-            <li style="align-items: center; padding-top: 15px;"><a href="#">Shop</a></li>
+            <li style="align-items: center; padding-top: 15px;"><a href="{% url 'shop' %}">Shop</a></li>
             <li class="dropdown" style="align-items: center; padding-top: 15px;">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Shop by Category
+              <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'shopbycategory' %}">Shop by Category
               <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Casuals</a></li>

@@ -20,13 +20,23 @@ from django.conf import settings
 from django.conf.urls.static import static
 from products_app import views as product_view
 from user_accounts_app import views as user_view
+from cart_app import views as cart_view
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
     path('',product_view.LogHome,name='LogHome'),
     path('home',product_view.Home,name='home'),
+    path('productview/<int:pk>',product_view.ProductView,name='productview'),
     path('login',user_view.LogPage,name='login'),
+    path('passwordreset',user_view.password_reset_request,name='passwordreset'),
+    path('verifyotp',user_view.verify_otp,name='verifyotp'),
+    path('setnewpassword',user_view.set_new_password,name='setnewpassword'),
+    path('signup',user_view.SignUp,name='signup'),
+    path('addtocart/<int:id>',cart_view.AddToCart,name='addtocart'),
+    path('shop',product_view.Shop,name='shop'),
+    path('filter',product_view.Filter,name='filter'),
+    path('shopbycategory',product_view.ShopCategory,name='shopbycategory'),
 ]
 if settings.DEBUG:
     urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

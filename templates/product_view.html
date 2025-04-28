@@ -1,0 +1,258 @@
+{% extends 'home_nav.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .thumbnail-image {
+        transition: all 0.3s ease;
+    }
+    .thumbnail-image:hover {
+        transform: scale(1.05);
+        border: 2px solid #337ab7;
+    }
+    .quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-control button {
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.quantity-control input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+}
+</style>
+    
+{% endblock %}
+
+{% block content %}
+<div>
+    <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-weight:bold; color: maroon; padding: 25px;">{{product.Name}}</h1>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Main Image -->
+            <img id="mainImage" src="{{ product.images.first.Image.url }}" class="img-responsive center-block" alt="Product Image" style="max-height: 500px;">
+
+            <button onclick="showPrev()" style="position: absolute; top: 50%; left: 0; transform: translateY(-50%);" class="btn btn-default">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </button>
+            <button onclick="showNext()" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%);" class="btn btn-default">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
+      
+            <!-- Thumbnails -->
+            <div class="row" style="margin-top: 15px; padding-left: 27px; white-space: nowrap; overflow-x: auto;">
+              {% for img in product.images.all %}
+                <div class="col-xs-3" style="display: inline-block; float: none;">
+                  <img src="{{ img.Image.url }}" 
+                       class="img-thumbnail thumbnail-image" 
+                       style="height: 80px; width: 100%; object-fit: cover; cursor: pointer;" 
+                       onclick="changeMainImage(this)">
+                </div>
+              {% endfor %}
+            </div>
+<script>
+
+  var imageUrls = [
+    {% for img in product.images.all %}
+      "{{ img.Image.url }}"{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+
+  var currentIndex = 0;
+
+  function updateMainImage() {
+    document.getElementById('mainImage').src = imageUrls[currentIndex];
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % imageUrls.length;
+    updateMainImage();
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + imageUrls.length) % imageUrls.length;
+    updateMainImage();
+  }
+
+  function selectImage(index) {
+    currentIndex = index;
+    updateMainImage();
+  }
+</script>
+
+</div>
+      
+          <div class="col-md-6" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+            <!-- Product Info -->
+            <h4>Product Code : {{ product.Product_Code }}</h4>
+            <h2 style="font-weight: bold;">₹ {{ product.Price }}</h2>
+            <div><hr></div>
+            <h4 style="font-size: 25px;">Product Description</h4>
+            <p>{{product.Type}}</p>
+            <p>Material : {{product.Material}}</p>
+            <p>Colour : {{product.Colour}}</p>
+            <p>Wash Care : {{product.Wash_Care}}</p>
+            <p style="font-weight: bold; padding-top: 10px; padding-bottom: 5px;">Dispatch Time : 10 Working Days</p>
+            <p>* Product dispatch time may increase or decrease depends on the manufacturing.</p>
+            <p>* Order cancellation or emergency dispatch cannot be done.</p>
+            <p>* Place order only after reading instructions.</p>
+            <div><hr></div>
+            <div class="form-group">
+                <label><strong>SIZE</strong></label><br>
+                
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default">
+                    <input type="radio" name="size" value="XS" autocomplete="off"> XS
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="size" value="S" autocomplete="off"> S
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="size" value="M" autocomplete="off"> M
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="size" value="L" autocomplete="off"> L
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="size" value="XL" autocomplete="off"> XL
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="size" value="2XL" autocomplete="off"> 2XL
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="size" value="3XL" autocomplete="off"> 3XL
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="size" value="4XL" autocomplete="off"> 4XL
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="size" value="5XL" autocomplete="off"> 5XL
+                  </label>
+                </div>
+              </div>
+              
+          </div>
+
+<form id="cartForm" method="post" action="{% url 'addtocart' product.id %}">
+    {% csrf_token %}
+
+    <div style="display: flex; align-items: center; gap: 10px; padding-top: 30px; padding-left: 15px; padding-bottom: 34px;">
+
+        <button id="wishlistButton" type="button" class="btn" style="background: none; border: none; font-size: 20px; outline: none; box-shadow: none; color: grey;">
+            <i id="heartIcon" class="glyphicon glyphicon-heart-empty"></i>
+        </button>
+        
+        <div class="quantity-control">
+            <button type="button" onclick="decreaseQuantity()">-</button>
+            <input type="text" id="quantity" name="quantity" value="1" readonly>
+            <button type="button" onclick="increaseQuantity()">+</button>
+        </div>
+
+        <button id="cartButton" type="submit" class="btn mt-3" 
+            style="background-color: goldenrod; 
+                   background: linear-gradient(180deg, #c6a513, #b7b3a6); 
+                   box-shadow: 5px 5px 10px #c5c5c5, -5px -5px 10px #ffffff;">
+            Add to Cart
+        </button>
+
+    </div>
+</form>
+
+<script>
+function decreaseQuantity() {
+    let qtyInput = document.getElementById('quantity');
+    let qty = parseInt(qtyInput.value);
+    if (qty > 1) {
+        qtyInput.value = qty - 1;
+    }
+}
+
+function increaseQuantity() {
+    let qtyInput = document.getElementById('quantity');
+    let qty = parseInt(qtyInput.value);
+    qtyInput.value = qty + 1;
+}
+
+let productAdded = false;
+
+document.getElementById('cartForm').addEventListener('submit', function(event) {
+    if (!productAdded) {
+        productAdded = true;
+        event.preventDefault();
+        this.submit();
+        document.getElementById('cartButton').innerText = "View Cart";
+    } else {
+        event.preventDefault();
+        window.location.href = "#"; 
+    }
+});
+document.getElementById('wishlistButton').addEventListener('click', function() {
+    const heartIcon = document.getElementById('heartIcon');
+    if (heartIcon.classList.contains('glyphicon-heart-empty')) {
+        heartIcon.classList.remove('glyphicon-heart-empty');
+        heartIcon.classList.add('glyphicon-heart');
+        heartIcon.style.color = 'red';
+    } else {
+        heartIcon.classList.remove('glyphicon-heart');
+        heartIcon.classList.add('glyphicon-heart-empty');
+        heartIcon.style.color = 'grey';
+    }
+});
+</script>
+
+        </div>
+      </div>
+      
+    
+
+    <!-- <div id="productCarousel" class="carousel slide" data-ride="carousel" style="max-width:400px; max-height:200px; margin: auto;">
+        <div class="carousel-inner">
+      
+          {% for img in product.images.all %}
+            <div class="item {% if forloop.first %}active{% endif %}">
+              <img src="{{ img.Image.url }}" class="d-block w-100" alt="Product Image">
+            </div>
+          {% endfor %}
+      
+        </div>
+      
+        <a class="left carousel-control" href="#productCarousel" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        
+        <a class="right carousel-control" href="#productCarousel" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      
+</div>
+
+      
+          <div class="card-body">
+            <h2 class="card-title">Product Code: {{ product.Product_Code }}</h2>
+            <p class="card-text text-muted">{{ product.description }}</p>
+            <h4 class="text-primary">₹{{ product.price }}</h4>
+      
+            <form method="post">
+              {% csrf_token %}
+              <button class="btn btn-primary mt-3">Add to Cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+</div> -->
+{% endblock %}

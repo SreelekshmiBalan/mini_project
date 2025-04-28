@@ -56,26 +56,32 @@
     <div class="main">
         <div class="main1">
             <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
                 <h2 style="color: maroon; font-family:Georgia, 'Times New Roman', Times, serif ; font-weight: bold; padding-bottom: 30px;">USER SIGN-IN</h2>
-                <div style="margin-bottom: 20px;"><input type="text" placeholder="Username"></div>
-                <div><input type="text" placeholder="Password"></div>
-                <div style="padding-top: 0px; padding-left: 68px;"><a href="">Forgot Password?</a></div>
-                <div><button style="margin-top: 18px;">LOGIN</button></div>
+                <div style="margin-bottom: 20px;"><input type="text" name="Username" placeholder="Username"></div>
+                <div><input type="text" name="Password" placeholder="Password"></div>
+                <div style="padding-top: 0px; padding-left: 68px;"><a href="setnewpassword">Forgot Password?</a></div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button type="submit">Login</button>
+                    
+                    {% if error %}
+                      <span style="color: red; font-size: 14px;">
+                        {{ error }}
+                      </span>
+                    {% endif %}
+                  </div>
                 <div class="or-divider">
                     <hr>
                     <span>OR</span>
                     <hr>
                 </div>                  
                 <div><a href="">Log in with Google</a></div>
-                <div style="padding-top: 140px; padding-left: 30px;">Don't Have an Account?<a href="">Sign Up</a></div>
+                <div style="padding-top: 140px; padding-left: 30px;">Don't Have an Account?<a href="signup">Sign Up</a></div>
             </form>
         </div>
         <div>
             <img src="{% static 'images/InShot_20250410_100050248.jpg' %}" alt="" height="540px" width="360px" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
         </div>
-        {% if error %}
-            {{ error }}
-        {% endif %}
     </div>
 {% endblock %}
 

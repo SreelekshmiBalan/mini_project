@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
+    
+
     <style>
         .custom-navbar {
     background-color: rgb(47, 12, 12);
@@ -20,12 +22,13 @@
   }
   .custom-navbar .navbar-brand,
   .custom-navbar .nav > li > a {
-    color: #fcfcfc; /* dark text for white background */
+    color: #fcfcfc;
 }
 .custom-navbar .nav > li > a:hover,
 .custom-navbar .nav > li.active > a {
     color: #d3a31f; /* highlight color */
     font-weight: bold;
+    background: rgb(47, 12, 12);
   }
   .footer-link {
   color: #aaa;
@@ -48,8 +51,8 @@
   color: #686666;
 }
 
-
   </style>
+
   {% block extra_css %}
   {% endblock %}
 </head>
@@ -63,11 +66,11 @@
             </span>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active" style="align-items: center; padding-top: 52px;"><a href="#">Home</a></li>
-            <li style="align-items: center; padding-top: 52px;"><a href="#">About</a></li>
-            <li style="align-items: center; padding-top: 52px;"><a href="#">Shop</a></li>
-            <li class="dropdown" style="align-items: center; padding-top: 52px;">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Shop by Category
+            <li class="active" style="align-items: center; padding-top: 15px;"><a href="{% url 'home' %}">Home</a></li>
+            <li style="align-items: center; padding-top: 15px;"><a href="#">About</a></li>
+            <li style="align-items: center; padding-top: 15px;"><a href="{% url 'shop' %}">Shop</a></li>
+            <li class="dropdown" style="align-items: center; padding-top: 15px;">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'shopbycategory' %}">Shop by Category
               <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Casuals</a></li>
@@ -77,7 +80,7 @@
             </li>
           </ul>
           <form class="navbar-form navbar-left" action="/action_page.php">
-            <div class="input-group" style="align-items: center; padding-top: 50px; padding-left: 30px;">
+            <div class="input-group" style="align-items: center; padding-top: 15px; padding-left: 30px;">
               <input type="text" class="form-control" placeholder="Search" style="width: 500px;">
               <div class="input-group-btn">
                 <button class="btn btn-default" type="submit">
@@ -86,11 +89,11 @@
               </div>
             </div>
           </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-heart"></span> Wishlist</a></li>
-            <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-            <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
-          </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-heart"></span> Wishlist</a></li>
+              <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+              <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+            </ul>
         </div>
       </nav>
 
@@ -127,7 +130,7 @@
             <div class="col-sm-2">
               <h5 style="color: #373737;">Discover</h5>
               <ul class="list-unstyled">
-                <li><a href="{% url 'Home' %}" class="footer-link">Home</a></li>
+                <li><a href="{% url 'LogHome' %}" class="footer-link">Home</a></li>
                 <li><a href="#" class="footer-link">About Us</a></li>
                 <li><a href="#" class="footer-link">Portfolio</a></li>
                 <li><a href="#" class="footer-link">Services</a></li>

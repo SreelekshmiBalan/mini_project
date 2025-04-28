@@ -26,7 +26,7 @@ class Product(models.Model):
         return self.Name
 
 class ProductImage(models.Model):
-    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE,related_name='images')
     Image=models.FileField(upload_to='product_images/', blank=True, null=True)
     def __str__(self):
         return self.product.Name

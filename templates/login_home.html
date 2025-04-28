@@ -153,7 +153,7 @@
     <div class="item">
       <img src="{% static 'carousel_img/slide3.jpg' %}" alt="Slide 3" style="width:100%; height:500px; object-fit:cover;">
       <div class="carousel-caption caption3">
-        <a href=""><button class="buttonshop" role="button">Shop Now</button></a>
+        <a href="{% url 'shop' %}"><button class="buttonshop" role="button">Shop Now</button></a>
       </div>
     </div>
   </div>
@@ -176,8 +176,8 @@
         {% for product in products %}
         <div class="col-md-3">
             <div class="category-card">
-                <img src="{{ product.productimage_set.first.Image.url }}" alt="{{ product.Name }}">
-                <div class="category-name">{{ product.Name }}</div>
+                <img src="{{ product.images.first.Image.url }}" alt="{{ product.Name }}">
+                <a href="{% url 'productview' product.pk %}"><div class="category-name">{{ product.Name }}</div></a>
             </div>
         </div>
         {% endfor %}
