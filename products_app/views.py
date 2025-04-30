@@ -43,14 +43,22 @@ def Filter(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'shop.html', {'page_obj': page_obj,'category': category_list})
 
-def ShopCategory(request):
-    product = Product.objects.all()
-    category_list = Category.objects.all()
-    category = request.GET.get('category', None)
-    if category:
-        product = product.filter(category_id=category)
-    paginator = Paginator(product.order_by('Name'), 12)
-    page_number = request.GET.get('page', 1)
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'shop_by_category.html', {'page_obj': page_obj,'category': category_list})
+def ShopCategory(request,pk):
+    category=get_object_or_404(Category,pk=pk)
+    return render(request,'shop_by_category.html')
+    # product = Product.objects.all()
+    # category_list = Category.objects.all()
+    # category = request.GET.get('category', None)
+    # if category:
+    #     product = product.filter(category_id=category)
+    # paginator = Paginator(product.order_by('Name'), 12)
+    # page_number = request.GET.get('page', 1)
+    # page_obj = paginator.get_page(page_number)
+    # return render(request, 'shop_by_category.html', {'page_obj': page_obj,'category': category_list})
+
+def About(request):
+    return render(request,'about.html')
+
+
+
 

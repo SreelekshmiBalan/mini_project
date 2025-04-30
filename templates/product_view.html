@@ -150,9 +150,9 @@
 
     <div style="display: flex; align-items: center; gap: 10px; padding-top: 30px; padding-left: 15px; padding-bottom: 34px;">
 
-        <button id="wishlistButton" type="button" class="btn" style="background: none; border: none; font-size: 20px; outline: none; box-shadow: none; color: grey;">
-            <i id="heartIcon" class="glyphicon glyphicon-heart-empty"></i>
-        </button>
+        <a href=""><button id="wishlistButton" type="button" value="Submit to WishList" name="wishlistbutton" class="btn" style="background: none; border: none; font-size: 20px; outline: none; box-shadow: none; color: grey;">
+          <i id="heartIcon" class="glyphicon glyphicon-heart-empty"></i>
+      </button></a>
         
         <div class="quantity-control">
             <button type="button" onclick="decreaseQuantity()">-</button>
@@ -160,11 +160,8 @@
             <button type="button" onclick="increaseQuantity()">+</button>
         </div>
 
-        <button id="cartButton" type="submit" class="btn mt-3" 
-            style="background-color: goldenrod; 
-                   background: linear-gradient(180deg, #c6a513, #b7b3a6); 
-                   box-shadow: 5px 5px 10px #c5c5c5, -5px -5px 10px #ffffff;">
-            Add to Cart
+        <button id="cartButton" type="submit" value="Submit to AddToCart" name="cartbutton" class="btn mt-3" style="background-color: goldenrod; background: linear-gradient(180deg, #c6a513, #b7b3a6); box-shadow: 5px 5px 10px #c5c5c5, -5px -5px 10px #ffffff;">
+          Add to Cart
         </button>
 
     </div>

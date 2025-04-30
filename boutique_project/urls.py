@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from products_app import views as product_view
 from user_accounts_app import views as user_view
 from cart_app import views as cart_view
+from wishlist_app import views as wishlist_view
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
@@ -36,7 +37,9 @@ urlpatterns = [
     path('addtocart/<int:id>',cart_view.AddToCart,name='addtocart'),
     path('shop',product_view.Shop,name='shop'),
     path('filter',product_view.Filter,name='filter'),
-    path('shopbycategory',product_view.ShopCategory,name='shopbycategory'),
+    path('shopbycategory/<int:pk>',product_view.ShopCategory,name='shopbycategory'),
+    path('about',product_view.About,name='about'),
+    path('wishlist/<int:pk>',wishlist_view.Wishlist,name='wishlist'),
 ]
 if settings.DEBUG:
     urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

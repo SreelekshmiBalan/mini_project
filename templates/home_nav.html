@@ -66,12 +66,20 @@
             </span>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active" style="align-items: center; padding-top: 15px;"><a href="{% url 'home' %}">Home</a></li>
-            <li style="align-items: center; padding-top: 15px;"><a href="#">About</a></li>
-            <li style="align-items: center; padding-top: 15px;"><a href="{% url 'shop' %}">Shop</a></li>
-            <li class="dropdown" style="align-items: center; padding-top: 15px;">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'shopbycategory' %}">Shop by Category
-              <span class="caret"></span></a>
+            <li class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}" style="align-items: center; padding-top: 15px;">
+              <a href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}" style="align-items: center; padding-top: 15px;">
+              <a href="{% url 'about' %}">About</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == 'shop' %}active{% endif %}" style="align-items: center; padding-top: 15px;">
+              <a href="{% url 'shop' %}">Shop</a>
+            </li>
+            <li class="dropdown {% if request.resolver_match.url_name == 'shopbycategory' %}active{% endif %}" style="align-items: center; padding-top: 15px;">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                Shop by Category
+                <span class="caret"></span>
+              </a>
               <ul class="dropdown-menu">
                 <li><a href="#">Casuals</a></li>
                 <li><a href="#">Salwar</a></li>
@@ -90,9 +98,9 @@
             </div>
           </form>
             <ul class="nav navbar-nav navbar-right">
-              <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-heart"></span> Wishlist</a></li>
-              <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-              <li style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+              <li class="{% if request.resolver_match.url_name == 'wishlist' %}active{% endif %}" style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-heart"></span> Wishlist</a></li>
+              <li class="{% if request.resolver_match.url_name == 'cart' %}active{% endif %}" style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+              <li class="{% if request.resolver_match.url_name == 'profile '%}active{% endif %}" style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
             </ul>
         </div>
       </nav>
