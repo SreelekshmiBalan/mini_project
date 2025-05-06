@@ -9,7 +9,7 @@ from django.core.exceptions import ValidationError
 class Cart(models.Model):
     user=models.ForeignKey(Account,on_delete=models.CASCADE,null=True,blank=True)
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
-    size=models.CharField(max_length=50)
+    size=models.CharField(max_length=50,null=True,blank=True)
     quantity=models.IntegerField(default=1)
     def clean(self):
         if not self.user:

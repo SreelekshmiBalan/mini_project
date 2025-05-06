@@ -22,24 +22,31 @@ from products_app import views as product_view
 from user_accounts_app import views as user_view
 from cart_app import views as cart_view
 from wishlist_app import views as wishlist_view
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
+    # path('accounts/', include('allauth.urls')),
+    # path('logout', LogoutView.as_view()),
     path('',product_view.LogHome,name='LogHome'),
     path('home',product_view.Home,name='home'),
-    path('productview/<int:pk>',product_view.ProductView,name='productview'),
+    path('productview/<int:pk>/', product_view.ProductView, name='productview'),
     path('login',user_view.LogPage,name='login'),
     path('passwordreset',user_view.password_reset_request,name='passwordreset'),
     path('verifyotp',user_view.verify_otp,name='verifyotp'),
     path('setnewpassword',user_view.set_new_password,name='setnewpassword'),
     path('signup',user_view.SignUp,name='signup'),
-    path('addtocart/<int:id>',cart_view.AddToCart,name='addtocart'),
+    path('addtocart/<int:product_id>',cart_view.AddToCart,name='addtocart'),
+    path('cart/', cart_view.CartView, name='cart_view'),
     path('shop',product_view.Shop,name='shop'),
     path('filter',product_view.Filter,name='filter'),
     path('shopbycategory/<int:pk>',product_view.ShopCategory,name='shopbycategory'),
     path('about',product_view.About,name='about'),
-    path('wishlist/<int:pk>',wishlist_view.Wishlist,name='wishlist'),
+    path('wishlist/<int:pk>/', wishlist_view.Wishlist, name='wishlist'),
+    path('my-wishlist/', wishlist_view.Wishlist_View, name='wishlist_view'),
+    path('toggle-wishlist/<int:product_id>/', wishlist_view.toggle_wishlist, name='toggle_wishlist'),
+    
 ]
 if settings.DEBUG:
     urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'cart_app',
     'wishlist_app',
     'orders_app',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'boutique_project.urls'
@@ -111,6 +116,26 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# SOCIALACCOUNT_PROVIDERS={
+#     'google':{
+#         'SCOPE':[
+#             'profile',
+#             'email'
+#         ],
+#         'APP': {
+#             'client_id': os.environ['CLIENT_ID'],
+#             'secret': os.environ['CLIENT_SECRET'],
+#         },
+#         'AUTH_PARAMS': {
+#             'access_type':'online',
+#         }
+#     }
+# }
+
+# SITE_ID = 2
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -137,3 +162,7 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='user_accounts_app.Account'
+# AUTHENTICATION_BACKENDS=[
+#     'django.contrib.auth.backends.ModelBackend',
+#     'allauth.account.auth_backkends.AuthenticationBackend'
+# ]

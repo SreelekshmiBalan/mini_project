@@ -119,9 +119,7 @@
 {% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<p style="color: maroon; font-weight: bolder; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; font-size: x-large; padding-left: 10px; font-style: italic;">Hi, {{user.username}}</p>
-{% endif %}
+
 <div id="product-carousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -174,7 +172,7 @@
 
 
 <div class="container my-5">
-    <h2 class="text-center mb-4">Newly Launched</h2>
+    <h2 class="text-center mb-4" style="padding: 20px;">Newly Launched</h2>
     <div class="row g-2">
         {% for product in products %}
         <div class="col-md-3">
@@ -188,7 +186,7 @@
 </div>
 
 <div class="container my-5">
-    <h2 class="text-center mb-4">Top Categories</h2>
+    <h2 class="text-center mb-4" style="padding: 20px;">Top Categories</h2>
     <div class="row g-2">
         {% for category in categories %}
         <div class="col-md-3">
@@ -202,7 +200,7 @@
 </div>
 
 <div class="container my-5">
-    <h2 class="text-center mb-4">Our Best Sellers</h2>
+    <h2 class="text-center mb-4" style="padding: 20px;">Our Best Sellers</h2>
     <div class="row g-2">
         {% for best_seller in best_sellers %}
         <div class="col-md-3">

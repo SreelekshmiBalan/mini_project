@@ -1,5 +1,7 @@
 {% extends 'home_nav.html' %}
 {% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 
 {% block extra_css %}
 <style>
@@ -109,7 +111,9 @@
             <p>* Order cancellation or emergency dispatch cannot be done.</p>
             <p>* Place order only after reading instructions.</p>
             <div><hr></div>
-            <div class="form-group">
+            <form action="">
+              {% csrf_token %}
+              <div class="form-group">
                 <label><strong>SIZE</strong></label><br>
                 
                 <div class="btn-group" data-toggle="buttons">
@@ -134,25 +138,35 @@
                   <label class="btn btn-default">
                     <input type="radio" name="size" value="3XL" autocomplete="off"> 3XL
                   </label>
-                  <label class="btn btn-default">
-                    <input type="radio" name="size" value="4XL" autocomplete="off"> 4XL
-                  </label>
-                  <label class="btn btn-default">
-                    <input type="radio" name="size" value="5XL" autocomplete="off"> 5XL
-                  </label>
                 </div>
               </div>
-              
-          </div>
-
-<form id="cartForm" method="post" action="{% url 'addtocart' product.id %}">
-    {% csrf_token %}
+            </div>
+          </form>
 
     <div style="display: flex; align-items: center; gap: 10px; padding-top: 30px; padding-left: 15px; padding-bottom: 34px;">
 
-        <a href=""><button id="wishlistButton" type="button" value="Submit to WishList" name="wishlistbutton" class="btn" style="background: none; border: none; font-size: 20px; outline: none; box-shadow: none; color: grey;">
-          <i id="heartIcon" class="glyphicon glyphicon-heart-empty"></i>
-      </button></a>
+      <form method="POST" action="{% url 'toggle_wishlist' product.id %}">
+        {% csrf_token %}
+        <button type="submit" class="wishlist-btn" style="border: none; background: transparent;">
+            {% if in_wishlist %}
+                <i class="fa fa-heart" style="color: red;"></i>
+            {% else %}
+                <i class="fa fa-heart" style="color: #9e9a9a;"></i>
+            {% endif %}
+        </button>
+      </form>
+    
+    
+    
+    
+
+      <!-- <button class="wishlistButton" data-product-id="{{ product.id }}" style="background: none; border: none;">
+        <i class="glyphicon {% if in_wishlist %}glyphicon-heart text-danger{% else %}glyphicon-heart-empty text-secondary{% endif %} heartIcon"></i>
+    </button> -->
+    
+
+    
+    
         
         <div class="quantity-control">
             <button type="button" onclick="decreaseQuantity()">-</button>
@@ -165,7 +179,7 @@
         </button>
 
     </div>
-</form>
+
 
 <script>
 function decreaseQuantity() {
@@ -195,18 +209,71 @@ document.getElementById('cartForm').addEventListener('submit', function(event) {
         window.location.href = "#"; 
     }
 });
-document.getElementById('wishlistButton').addEventListener('click', function() {
-    const heartIcon = document.getElementById('heartIcon');
-    if (heartIcon.classList.contains('glyphicon-heart-empty')) {
-        heartIcon.classList.remove('glyphicon-heart-empty');
-        heartIcon.classList.add('glyphicon-heart');
-        heartIcon.style.color = 'red';
-    } else {
-        heartIcon.classList.remove('glyphicon-heart');
-        heartIcon.classList.add('glyphicon-heart-empty');
-        heartIcon.style.color = 'grey';
-    }
+
+$(document).ready(function() {
+    $('form[id^="wishlist-form-"]').submit(function(e) {
+        e.preventDefault();  // Prevent full-page reload
+
+        const form = $(this);
+        const url = form.attr('action');
+        const formData = form.serialize();
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            success: function(response) {
+                // Toggle the icon
+                const icon = form.find('i');
+                if (icon.hasClass('fa-regular')) {
+                    icon.removeClass('fa-regular fa-heart').addClass('fa-solid fa-heart').css('color', 'red');
+                } else {
+                    icon.removeClass('fa-solid fa-heart').addClass('fa-regular fa-heart').css('color', '');
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("An error occurred while updating wishlist.");
+            }
+        });
+    });
 });
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     const wishlistButton = document.querySelector('.wishlistButton');
+
+//     if (wishlistButton) {
+//         wishlistButton.addEventListener('click', function (e) {
+//             e.preventDefault();
+
+//             const productId = this.getAttribute('data-product-id');
+//             const heartIcon = this.querySelector('.heartIcon');
+
+//             fetch(`/wishlist/${productId}/`, {
+//                 method: 'GET',
+//                 headers: {
+//                     'X-Requested-With': 'XMLHttpRequest'
+//                 },
+//                 credentials: 'same-origin'
+//             })
+//             .then(response => response.json())
+//             .then(data => {
+//                 if (data.success) {
+//                     if (data.in_wishlist) {
+//                         heartIcon.classList.remove('glyphicon-heart-empty', 'text-secondary');
+//                         heartIcon.classList.add('glyphicon-heart', 'text-danger');
+//                     } else {
+//                         heartIcon.classList.remove('glyphicon-heart', 'text-danger');
+//                         heartIcon.classList.add('glyphicon-heart-empty', 'text-secondary');
+//                     }
+//                 }
+//             })
+//             .catch(error => {
+//                 console.error('Error:', error);
+//             });
+//         });
+//     }
+// });
+              
 </script>
 
         </div>

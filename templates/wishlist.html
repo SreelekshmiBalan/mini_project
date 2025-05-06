@@ -2,13 +2,56 @@
 {% load static %}
 
 {% block extra_css %}
+<style>
+    .wishlist-item {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .wishlist-item img {
+        height: 150px;
+        width: 150px;
+        object-fit: cover;
+        margin-right: 20px;
+    }
+
+    .wishlist-details {
+        flex-grow: 1;
+    }
+
+    .remove-btn {
+        background: none;
+        border: none;
+        font-size: 18px;
+        color: red;
+        cursor: pointer;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div class="main">
-    {% for wish in wishes %}
-    <div><img src="{{wish.images.first.Image.url}}" alt="{{wish.Name}}"></div>
-    <div><a href="{% url 'wishlist' wish.pk %}"><div class="category-name">{{ wish.Name }}</div></a></div>
-    {% endfor %}
+<div class="container">
+    <h2>My Wishlist</h2>
+    {% if wishes %}
+        {% for wish in wishes %}
+            <div class="wishlist-item">
+                <img src="{{ wish.product.images.first.Image.url }}" alt="{{ wish.product.Name }}">
+                <div class="wishlist-details">
+                    <h4><a href="{% url 'productview' wish.product.pk %}">{{ wish.product.Name }}</a></h4>
+                    <p>Price: ₹{{ wish.product.Price }}</p>
+                </div>
+                <form method="get" action="{% url 'wishlist' wish.product.pk %}">
+                    <button class="remove-btn" title="Remove from Wishlist">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>You have no items in your wishlist.</p>
+    {% endif %}
 </div>
 {% endblock %}

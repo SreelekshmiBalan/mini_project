@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Category,Product
+from wishlist_app.models import WishLists
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
@@ -17,9 +18,18 @@ def Home(request):
     best_sellers=Product.objects.filter(Best_Seller=True)
     return render(request,'home.html',{'products':products,'categories':categories,'best_sellers':best_sellers})
 
-def ProductView(request,pk):
-    product=get_object_or_404(Product,pk=pk)
-    return render(request,'product_view.html',{'product':product})
+def ProductView(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    in_wishlist = False
+    if request.user.is_authenticated:
+        in_wishlist = WishLists.objects.filter(user=request.user, product=product).exists()
+
+    context = {
+        'product': product,
+        'in_wishlist': in_wishlist,
+    }
+    return render(request, 'product_view.html', context)
 
 def Shop(request):
     product=Product.objects.all()

@@ -1,12 +1,17 @@
 from django.db import models
 from products_app.models import Product
+from user_accounts_app.models import Account
 
 # Create your models here.
-# class WishList(models.Model):
-#     product=models.ForeignKey(Product,on_delete=models.CASCADE,null=True,blank=True)
-#     Product_Name=models.CharField(max_length=250)
-#     Product_Code=models.CharField(max_length=100)
-#     Product_Price=models.IntegerField()
-#     def __str__(self):
-#         return self.product.Name
+
+class WishLists(models.Model):
+    user=models.ForeignKey(Account,on_delete=models.CASCADE)
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together=('user','product')
+
+    def __str__(self):
+        return self.product.Name
 
