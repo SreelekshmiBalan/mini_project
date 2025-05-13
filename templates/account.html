@@ -1,77 +1,112 @@
 {% extends 'home_nav.html' %}
 
 {% block extra_css %}
+<style>
+    *{
+        padding: 0px;
+        margin: 0px;
+    }
+
+    body {
+        background-image: url("{% static 'images/shopping cartoon.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100vh;
+    }
+    .main{
+        padding: 0;
+        background-color: white;
+        border-radius: 7px;
+    }
+    .main form{
+        padding: 15px;
+        border-radius: 5px;
+        justify-content: center;
+        margin-left: 500px;
+        margin-right: 500px;
+    }
+    form input{
+        margin: 7px;
+        height: 25px;
+    }
+    form{
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div>
-    <form action="">
-        <div>
-            <div><label for="">Full Name</label></div>
+
+<div >
+    <div class="main">
+        <form action="">
             <div>
-                <div>
-                    <input type="text" name="first_name">
-                </div>
-                <div>
-                    <input type="text" name="last_name">
-                </div>
-            </div>
-            <div><label for="">Gender</label></div>
-            <div>
-                <select name="gender" id="">
-                    <option value="">Please select</option>
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                </select>
-            </div>
-        </div>
-        <div>
-            <div><label for="">Birth Date</label></div>
-            <div>
-                <input type="date" name="birth_date">
+                <h2>My Profile Edit</h2>
             </div>
             <div>
+                <div><label for="">Name</label></div>
                 <div>
-                    <div>
-                        <label for="">Email</label>
-                    </div>
-                    <div>
-                        <input type="text" name="email">
-                    </div>
+                    <input type="text" name="username" placeholder="Name" value="user.username">
                 </div>
+                <div><label for="">Gender</label></div>
                 <div>
-                    <label for="">Phone Number</label>
-                </div>
-                <div>
-                    <input type="text" name="phone">
+                    <select name="gender" id="">
+                        <option value="">Please select</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
             </div>
             <div>
+                <div><label for="">Birth Date</label></div>
                 <div>
-                    <label for="">Address</label>
-                </div>
-                <div>
-                    <input type="text" name="address_line1" placeholder="Door No, Street">
-                </div>
-                <div>
-                    <input type="text" name="address_line2" placeholder="City">
+                    <input type="date" name="birth_date">
                 </div>
                 <div>
                     <div>
-                        <input type="text" name="district" placeholder="District">
+                        <div>
+                            <label for="">Email</label>
+                        </div>
+                        <div>
+                            <input type="email" name="email" value="user.email">
+                        </div>
                     </div>
                     <div>
-                        <input type="text" name="state" placeholder="State">
+                        <label for="">Phone Number</label>
+                    </div>
+                    <div>
+                        <input type="text" name="phone">
                     </div>
                 </div>
                 <div>
-                    <input type="text" name="Postal Code">
+                    <div>
+                        <label for="">Address</label>
+                    </div>
+                    <div>
+                        <input type="text" name="address_line1" placeholder="Door No, Street">
+                    </div>
+                    <div>
+                        <input type="text" name="address_line2" placeholder="City">
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text" name="district" placeholder="District">
+                        </div>
+                        <div>
+                            <input type="text" name="state" placeholder="State">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" name="Postal Code" placeholder="Postal Code">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <a href=""><button>Submit</button></a>
-        </div>
-    </form>
+            <div>
+                <a href=""><button>Submit</button></a>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

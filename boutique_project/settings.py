@@ -166,3 +166,6 @@ AUTH_USER_MODEL='user_accounts_app.Account'
 #     'django.contrib.auth.backends.ModelBackend',
 #     'allauth.account.auth_backkends.AuthenticationBackend'
 # ]
+
+RAZORPAY_KEY_ID = 'rzp_test_ueRmFiHKeH2UFJ'
+RAZORPAY_KEY_SECRET = '2GU390infRCa2R5x2GIvCIhN'

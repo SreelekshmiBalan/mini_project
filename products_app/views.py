@@ -4,6 +4,8 @@ from wishlist_app.models import WishLists
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
+from cart_app.models import Cart
+from wishlist_app.models import WishLists
 
 # Create your views here.
 def LogHome(request):
@@ -18,18 +20,40 @@ def Home(request):
     best_sellers=Product.objects.filter(Best_Seller=True)
     return render(request,'home.html',{'products':products,'categories':categories,'best_sellers':best_sellers})
 
-def ProductView(request, pk):
-    product = get_object_or_404(Product, pk=pk)
+from cart_app.models import Cart
 
-    in_wishlist = False
+def productview(request, id):
+    product = get_object_or_404(Product, id=id)
+    in_wishlist = WishLists.objects.filter(user=request.user, product=product).exists() if request.user.is_authenticated else False
+
+    product_in_cart = False
     if request.user.is_authenticated:
-        in_wishlist = WishLists.objects.filter(user=request.user, product=product).exists()
+        product_in_cart = Cart.objects.filter(user=request.user, product=product).exists()
 
-    context = {
+    size_list = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL']  # Or pull from DB if dynamic
+
+    return render(request, 'product_view.html', {
         'product': product,
         'in_wishlist': in_wishlist,
-    }
-    return render(request, 'product_view.html', context)
+        'product_in_cart': product_in_cart,
+        'size_list': size_list,
+    })
+
+
+
+
+# def ProductView(request, pk):
+#     product = get_object_or_404(Product, pk=pk)
+
+#     in_wishlist = False
+#     if request.user.is_authenticated:
+#         in_wishlist = WishLists.objects.filter(user=request.user, product=product).exists()
+
+#     context = {
+#         'product': product,
+#         'in_wishlist': in_wishlist,
+#     }
+#     return render(request, 'product_view.html', context)
 
 def Shop(request):
     product=Product.objects.all()

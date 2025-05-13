@@ -13,7 +13,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     Name=models.CharField(max_length=500)
     Product_Code=models.CharField(max_length=100,null=True,blank=True)
-    Price=models.CharField(max_length=100)
+    Price=models.IntegerField(null=True,blank=True)
     Colour=models.CharField(max_length=1000,null=True,blank=True)
     Material=models.CharField(max_length=1000,null=True,blank=True)
     Type=models.CharField(max_length=1000,null=True,blank=True)

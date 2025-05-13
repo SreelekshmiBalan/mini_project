@@ -178,7 +178,7 @@
         <div class="col-md-3">
             <div class="category-card">
                 <img src="{{ product.images.first.Image.url }}" alt="{{ product.Name }}">
-                <a href="{% url 'productview' product.pk %}"><div class="category-name">{{ product.Name }}</div></a>
+                <a href="{% url 'productview' product.id %}"><div class="category-name">{{ product.Name }}</div></a>
             </div>
         </div>
         {% endfor %}

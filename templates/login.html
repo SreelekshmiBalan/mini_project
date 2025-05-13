@@ -58,8 +58,8 @@
             <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
                 <h2 style="color: maroon; font-family:Georgia, 'Times New Roman', Times, serif ; font-weight: bold; padding-bottom: 30px;">USER SIGN-IN</h2>
-                <div style="margin-bottom: 20px;"><input type="text" name="Username" placeholder="Username"></div>
-                <div><input type="text" name="Password" placeholder="Password"></div>
+                <div style="margin-bottom: 20px;"><input type="text" name="username" placeholder="Username"></div>
+                <div><input type="password" name="password" placeholder="Password"></div>
                 <div style="padding-top: 0px; padding-left: 68px;"><a href="setnewpassword">Forgot Password?</a></div>
                 <div style="display: flex; align-items: center; gap: 10px;">
                     <button type="submit">Login</button>

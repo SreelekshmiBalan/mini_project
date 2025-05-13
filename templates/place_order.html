@@ -1,0 +1,56 @@
+{% extends 'home_nav.html' %}
+{% load cart_extras %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Review Your Order</h2>
+    
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Size</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.product.Name }}</td>
+                <td>{{ item.size }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>₹{{ item.product.Price }}</td>
+                <td>₹{{ item.quantity|multiply:item.product.Price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4 class="text-right">Total: ₹{{ total }}</h4>
+
+    <form id="payment-form" method="POST" action="{% url 'placeorder' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="address">Shipping Address</label>
+            <textarea class="form-control" name="address" id="address" rows="3" required></textarea>
+        </div>
+
+        <!-- If using Razorpay -->
+        <script src="https://checkout.razorpay.com/v1/checkout.js"data-key="{{ razorpay_key_id }}"
+        data-amount="{{ total|floatformat:0 }}00"
+        data-currency="INR"
+        data-order_id="{{ razorpay_order_id }}"
+        data-buttontext="Pay Now"
+        data-name="The Golden Hanger"
+        data-description="Order Payment"
+        data-prefill.name="{{ request.user.username }}"
+        data-theme.color="#F37254">
+        </script>
+        <!-- <button type="submit" class="btn btn-primary mt-3">Pay Now</button> -->
+    </form>
+</div>
+{% endblock %}

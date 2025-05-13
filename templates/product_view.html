@@ -33,6 +33,21 @@
     border: 1px solid #ccc;
     margin: 0 5px;
 }
+.size-selector {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.size-selector .btn {
+    flex: 0 0 auto;
+    min-width: 50px; 
+    text-align: center;
+}
+
 </style>
     
 {% endblock %}
@@ -68,9 +83,10 @@
 
   var imageUrls = [
     {% for img in product.images.all %}
-      "{{ img.Image.url }}"{% if not forloop.last %},{% endif %}
+    "{{ img.Image.url }}"{% if not forloop.last %},{% endif %}
     {% endfor %}
   ];
+
 
   var currentIndex = 0;
 
@@ -99,7 +115,7 @@
           <div class="col-md-6" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
             <!-- Product Info -->
             <h4>Product Code : {{ product.Product_Code }}</h4>
-            <h2 style="font-weight: bold;">₹ {{ product.Price }}</h2>
+            <h2 style="font-weight: bold;">₹ {{ product.Price }}/-</h2>
             <div><hr></div>
             <h4 style="font-size: 25px;">Product Description</h4>
             <p>{{product.Type}}</p>
@@ -111,7 +127,7 @@
             <p>* Order cancellation or emergency dispatch cannot be done.</p>
             <p>* Place order only after reading instructions.</p>
             <div><hr></div>
-            <form action="">
+            <!-- <form action="">
               {% csrf_token %}
               <div class="form-group">
                 <label><strong>SIZE</strong></label><br>
@@ -141,13 +157,14 @@
                 </div>
               </div>
             </div>
-          </form>
+          </form> -->
 
     <div style="display: flex; align-items: center; gap: 10px; padding-top: 30px; padding-left: 15px; padding-bottom: 34px;">
 
-      <form method="POST" action="{% url 'toggle_wishlist' product.id %}">
+      <form id="wishlist-form-{{ product.id }}" method="POST" action="{% url 'toggle_wishlist' product.id %}">
         {% csrf_token %}
         <button type="submit" class="wishlist-btn" style="border: none; background: transparent;">
+          
             {% if in_wishlist %}
                 <i class="fa fa-heart" style="color: red;"></i>
             {% else %}
@@ -155,29 +172,51 @@
             {% endif %}
         </button>
       </form>
-    
-    
-    
-    
 
-      <!-- <button class="wishlistButton" data-product-id="{{ product.id }}" style="background: none; border: none;">
-        <i class="glyphicon {% if in_wishlist %}glyphicon-heart text-danger{% else %}glyphicon-heart-empty text-secondary{% endif %} heartIcon"></i>
-    </button> -->
+      <form method="POST" action="{% url 'addtocart' product.id %}" id="cartForm" onsubmit="return validateSizeSelection()">
+        {% csrf_token %}
     
-
+        <!-- Size Selection -->
+        <div class="size-selector">
+          {% for size in size_list %}
+              <label class="btn btn-default">
+                  <input type="radio" name="size" value="{{ size }}" autocomplete="off"> {{ size }}
+              </label>
+          {% endfor %}
+      </div>
+      
     
-    
-        
-        <div class="quantity-control">
+        <!-- Quantity Selector -->
+        <div class="quantity-control mt-3" style="margin-top: 10px;">
             <button type="button" onclick="decreaseQuantity()">-</button>
-            <input type="text" id="quantity" name="quantity" value="1" readonly>
+            <input type="text" id="quantity" name="quantity" value="1" readonly style="width: 40px; text-align: center;">
             <button type="button" onclick="increaseQuantity()">+</button>
         </div>
-
-        <button id="cartButton" type="submit" value="Submit to AddToCart" name="cartbutton" class="btn mt-3" style="background-color: goldenrod; background: linear-gradient(180deg, #c6a513, #b7b3a6); box-shadow: 5px 5px 10px #c5c5c5, -5px -5px 10px #ffffff;">
-          Add to Cart
-        </button>
-
+    
+        <!-- Add to Cart Button -->
+        <div style="display: flex; gap: 15px; margin-top: 20px;">
+          <!-- Add to Cart Button -->
+          <button type="submit" class="btn btn-primary"
+                  style="flex: 1;
+                         background-color: goldenrod;
+                         background: linear-gradient(180deg, #c6a513, #b7b3a6);
+                         box-shadow: 5px 5px 10px #c5c5c5, -5px -5px 10px #ffffff;">
+              Add to Cart
+          </button>
+      
+          <!-- View Cart Button -->
+          <a href="{% url 'cart_view' %}" class="btn btn-primary"
+             style="flex: 1;
+                    background-color: goldenrod;
+                    background: linear-gradient(180deg, #c6a513, #b7b3a6);
+                    box-shadow: 5px 5px 10px #c5c5c5, -5px -5px 10px #ffffff;">
+              View Cart
+          </a>
+      </div>
+      <div id="size-error" style="color: red; margin-top: 10px; display: none;"></div>
+      </form>
+      
+    
     </div>
 
 
@@ -196,19 +235,7 @@ function increaseQuantity() {
     qtyInput.value = qty + 1;
 }
 
-let productAdded = false;
 
-document.getElementById('cartForm').addEventListener('submit', function(event) {
-    if (!productAdded) {
-        productAdded = true;
-        event.preventDefault();
-        this.submit();
-        document.getElementById('cartButton').innerText = "View Cart";
-    } else {
-        event.preventDefault();
-        window.location.href = "#"; 
-    }
-});
 
 $(document).ready(function() {
     $('form[id^="wishlist-form-"]').submit(function(e) {
@@ -238,6 +265,19 @@ $(document).ready(function() {
     });
 });
 
+function validateSizeSelection() {
+    const sizeSelected = document.querySelector('input[name="size"]:checked');
+    const errorDiv = document.getElementById('size-error');
+
+    if (!sizeSelected) {
+        errorDiv.textContent = "Please select a size before adding product to cart";
+        errorDiv.style.display = "block";
+        return false;  // Prevent form submission
+    } else {
+        errorDiv.style.display = "none";
+        return true;  // Allow form submission
+    }
+}
 // document.addEventListener('DOMContentLoaded', function () {
 //     const wishlistButton = document.querySelector('.wishlistButton');
 

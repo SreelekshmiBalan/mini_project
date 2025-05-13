@@ -33,8 +33,8 @@ def SignUp(request):
 def LogPage(request):
     error=''
     if request.method=='POST':
-        UserName=request.POST['Username']
-        PassWord=request.POST['Password']
+        UserName=request.POST['username']
+        PassWord=request.POST['password']
         user=authenticate(request,username=UserName,password=PassWord)
         admin_user=authenticate(request,username=UserName,password=PassWord)
         if admin_user is not None and admin_user.is_staff:

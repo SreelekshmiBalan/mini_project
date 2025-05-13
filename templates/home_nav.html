@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>The Golden Hanger</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -100,7 +100,15 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="{% if request.resolver_match.url_name == 'wishlist_view' %}active{% endif %}" style="align-items: center; padding-top: 52px;"><a href="{% url 'wishlist_view' %}"><span class="glyphicon glyphicon-heart"></span> Wishlist</a></li>
               <li class="{% if request.resolver_match.url_name == 'cart' %}active{% endif %}" style="align-items: center; padding-top: 52px;"><a href="{% url 'cart_view' %}"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-              <li class="{% if request.resolver_match.url_name == 'profile '%}active{% endif %}" style="align-items: center; padding-top: 52px;"><a href="#"><span class="glyphicon glyphicon-user"></span> My Profile</a></li>
+              <li class="dropdown" style="align-items: center; padding-top: 52px;">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-user"></span> My Profile <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="">View Profile</a></li>
+                  <li><a href="">My Orders</a></li>
+                </ul>
+              </li>              
             </ul>
         </div>
       </nav>
