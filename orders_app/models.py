@@ -10,7 +10,6 @@ class Order(models.Model):
         ('Processing', 'Processing'),
         ('Shipped', 'Shipped'),
         ('Delivered', 'Delivered'),
-        ('Cancelled', 'Cancelled'),
     ]
 
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -18,7 +17,7 @@ class Order(models.Model):
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     shipping_address = models.TextField()
-    payment_method = models.CharField(max_length=50)  # e.g., COD, Razorpay, etc.
+    payment_method = models.CharField(max_length=50)  
     is_paid = models.BooleanField(default=False)
     paid_at = models.DateTimeField(null=True, blank=True)
 
@@ -28,9 +27,9 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    size = models.CharField(max_length=10)  # If your products have size options
+    size = models.CharField(max_length=10) 
     quantity = models.PositiveIntegerField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)  # Price at time of order
+    price = models.DecimalField(max_digits=10, decimal_places=2)  
 
     def __str__(self):
         return f"{self.quantity} x {self.product.Name} in Order #{self.order.id}"
