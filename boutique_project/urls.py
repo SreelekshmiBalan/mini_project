@@ -44,13 +44,17 @@ urlpatterns = [
     path('cart/update/<int:item_id>/', cart_view.update_cart_quantity, name='update_cart_quantity'),
     path('shop',product_view.Shop,name='shop'),
     path('filter',product_view.Filter,name='filter'),
+    path('categoryhome',product_view.CategoryHome,name='categoryhome'),
     path('shopbycategory/<int:pk>',product_view.ShopCategory,name='shopbycategory'),
     path('about',product_view.About,name='about'),
+    path('sizechart',product_view.SizeChart,name='sizechart'),
     path('wishlist/<int:pk>/', wishlist_view.Wishlist, name='wishlist'),
     path('my-wishlist/', wishlist_view.Wishlist_View, name='wishlist_view'),
     path('toggle-wishlist/<int:product_id>/', wishlist_view.toggle_wishlist, name='toggle_wishlist'),
     path('placeorder', order_view.PlaceOrder, name='placeorder'),
-    path('ordersuccess', order_view.OrderSuccess, name='ordersuccess'),
+    path('verify-payment/', order_view.verify_payment, name='verify_payment'),
+    path('order-success/<int:order_id>/', order_view.OrderSuccess, name='order_success'),
+
     
 ]
 if settings.DEBUG:

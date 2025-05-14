@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container mt-5">
     <h2>Review Your Order</h2>
-    
+
     <table class="table table-bordered mt-4">
         <thead>
             <tr>
@@ -31,26 +31,63 @@
 
     <h4 class="text-right">Total: ₹{{ total }}</h4>
 
-    <form id="payment-form" method="POST" action="{% url 'placeorder' %}">
-        {% csrf_token %}
+    <div class="form-group mt-4">
+        <label for="address">Shipping Address</label>
+        <textarea class="form-control" id="address" rows="3" required></textarea>
+    </div>
 
-        <div class="form-group">
-            <label for="address">Shipping Address</label>
-            <textarea class="form-control" name="address" id="address" rows="3" required></textarea>
-        </div>
-
-        <!-- If using Razorpay -->
-        <script src="https://checkout.razorpay.com/v1/checkout.js"data-key="{{ razorpay_key_id }}"
-        data-amount="{{ total|floatformat:0 }}00"
-        data-currency="INR"
-        data-order_id="{{ razorpay_order_id }}"
-        data-buttontext="Pay Now"
-        data-name="The Golden Hanger"
-        data-description="Order Payment"
-        data-prefill.name="{{ request.user.username }}"
-        data-theme.color="#F37254">
-        </script>
-        <!-- <button type="submit" class="btn btn-primary mt-3">Pay Now</button> -->
-    </form>
+    <button id="rzp-button" class="btn btn-primary mt-3">Pay Now</button>
 </div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "{{ razorpay_key_id }}",
+        "amount": "{{ total|floatformat:0 }}00",
+        "currency": "INR",
+        "name": "The Golden Hanger",
+        "description": "Order Payment",
+        "order_id": "{{ razorpay_order_id }}",
+        "handler": function (response) {
+            // POST to your verify_payment view
+            fetch("{% url 'verify_payment' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: new URLSearchParams({
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_signature: response.razorpay_signature
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = `/order-success/${data.order_id}/`;
+                } else {
+                    alert("Payment verification failed: " + data.error);
+                }
+            })
+            .catch(err => {
+                alert("An error occurred: " + err);
+            });
+        },
+        "prefill": {
+            "name": "{{ request.user.username }}"
+        },
+        "theme": {
+            "color": "#F37254"
+        }
+    };
+    
+    var rzp = new Razorpay(options);
+    document.getElementById('rzp-button').onclick = function (e) {
+        rzp.open();
+        e.preventDefault();
+    }
+</script>
+
+
 {% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'home_nav.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="text-center mb-4">
+                <h2 class="text-success fw-bold">
+                    <i class="bi bi-check-circle-fill"></i> Order Placed Successfully!
+                </h2>
+                <p class="lead mt-3">Thank you for shopping with us, <strong>{{ order.user.username }}</strong>.</p>
+            </div>
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Order ID:</strong> #{{ order.id }}</p>
+                    <p><strong>Total Amount:</strong> ₹{{ order.total_amount }}</p>
+                    <p><strong>Status:</strong> {{ order.status }}</p>
+                    <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
+                    <p><strong>Shipping Address:</strong><br>{{ order.shipping_address }}</p>
+                    <p><strong>Paid At:</strong> {{ order.paid_at|date:"F j, Y, g:i a" }}</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{% url 'home' %}" class="btn btn-outline-success px-4 py-2">
+                    <i class="bi bi-house-door"></i> Continue Shopping
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -75,16 +75,8 @@
             <li class="{% if request.resolver_match.url_name == 'shop' %}active{% endif %}" style="align-items: center; padding-top: 15px;">
               <a href="{% url 'shop' %}">Shop</a>
             </li>
-            <li class="dropdown {% if request.resolver_match.url_name == 'shopbycategory' %}active{% endif %}" style="align-items: center; padding-top: 15px;">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="">
-                Shop by Category
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Casuals</a></li>
-                <li><a href="#">Salwar</a></li>
-                <li><a href="#">Sarees</a></li>
-              </ul>
+            <li class="{% if request.resolver_match.url_name == 'categoryhome' %}active{% endif %}" style="align-items: center; padding-top: 15px;">
+              <a href="{% url 'categoryhome' %}">Shop by Category</a>
             </li>
           </ul>
           <form class="navbar-form navbar-left" action="/action_page.php">

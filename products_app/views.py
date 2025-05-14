@@ -77,9 +77,14 @@ def Filter(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'shop.html', {'page_obj': page_obj,'category': category_list})
 
+def CategoryHome(request):
+    category=Category.objects.all()
+    return render(request,'category_home.html',{'categories':category})
+
 def ShopCategory(request,pk):
-    category=get_object_or_404(Category,pk=pk)
-    return render(request,'shop_by_category.html')
+    category = get_object_or_404(Category, pk=pk)
+    products = Product.objects.filter(category=category)
+    return render(request,'shop_by_category.html',{'category':category, 'products':products})
     # product = Product.objects.all()
     # category_list = Category.objects.all()
     # category = request.GET.get('category', None)
@@ -92,6 +97,9 @@ def ShopCategory(request,pk):
 
 def About(request):
     return render(request,'about.html')
+
+def SizeChart(request):
+    return render(request,'size_chart.html')
 
 
 

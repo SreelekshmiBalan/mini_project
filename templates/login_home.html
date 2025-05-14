@@ -191,7 +191,7 @@
         <div class="col-md-3">
             <div class="category-card">
                 <img src="{{ category.Category_Image.url }}" alt="{{ category.Category_Name }}">
-                <div class="category-name">{{ category.Category_Name }}</div>
+                <a href="{% url 'shopbycategory' category.pk %}"><div class="category-name">{{ category.Category_Name }}</div></a>
             </div>
         </div>
         {% endfor %}
@@ -204,7 +204,7 @@
         {% for best_seller in best_sellers %}
         <div class="col-md-3">
             <div class="category-card">
-                <img src="{{ best_seller.productimage_set.first.Image.url }}" alt="{{ best_seller.Name }}">
+                <img src="{{ best_seller.images.first.Image.url }}" alt="{{ best_seller.Name }}">
                 <div class="category-name">{{ best_seller.Name }}</div>
             </div>
         </div>
