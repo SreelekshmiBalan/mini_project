@@ -39,7 +39,22 @@ def productview(request, id):
         'size_list': size_list,
     })
 
+def productviewlogin(request, id):
+    product = get_object_or_404(Product, id=id)
+    in_wishlist = WishLists.objects.filter(user=request.user, product=product).exists() if request.user.is_authenticated else False
 
+    product_in_cart = False
+    if request.user.is_authenticated:
+        product_in_cart = Cart.objects.filter(user=request.user, product=product).exists()
+
+    size_list = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL']  # Or pull from DB if dynamic
+
+    return render(request, 'product_view_login.html', {
+        'product': product,
+        'in_wishlist': in_wishlist,
+        'product_in_cart': product_in_cart,
+        'size_list': size_list,
+    })
 
 
 # def ProductView(request, pk):

@@ -2,8 +2,82 @@
 {% load static %}
 
 {% block extra_css %}
+<style>
+    .profile-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        border-radius: 12px;
+        background-color: #f9f9f9;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .profile-container h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .welcome-msg {
+        font-size: 20px;
+        margin-bottom: 30px;
+        color: #444;
+    }
+
+    .profile-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .profile-buttons a button {
+        padding: 12px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        background-color: #6c0b0b;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .profile-buttons a button:hover {
+        background-color: rgb(47, 12, 12);
+    }
+
+    @media (max-width: 500px) {
+        .profile-buttons {
+            flex-direction: column;
+        }
+
+        .profile-buttons a button {
+            width: 100%;
+        }
+    }
+</style>
 {% endblock %}
 
 {% block content %}
+<div class="profile-container">
+    <h2>My Profile</h2>
+    <div class="welcome-msg">Welcome, <strong>{{ user.username }}</strong></div>
+    <div>{% if user.email %}{{user.email}}{% endif %}</div>
+    <div><hr></div>
+    <div style="color:dimgray; text-align: left;padding-bottom: 15px;">{% if user.address_line_1 %}Address{% endif %}</div>
+    <div>{% if user.address_line_1 %}{{user.address_line_1}}{% endif %}</div>
+    <div>{% if user.address_line_2 %}{{user.address_line_2}}{% endif %}</div>
+    <div>{% if user.district %}{{user.district}}{% endif %}</div>
+    <div>{% if user.state %}{{user.state}}{% endif %}</div>
+    <div>{% if user.pin_code %}{{user.pin_code}}{% endif %}</div>
+    <div>{% if user.phone %}{{user.phone}}{% endif %}</div>
 
+    <div class="profile-buttons">
+        <a href="{% url 'profileedit' %}"><button>Edit Profile</button></a>
+        <a href="{% url 'my_orders' %}"><button>My Orders</button></a>
+        <a href="{% url 'wishlist_view' %}"><button>My Wishlist</button></a>
+        <a href="{% url 'cart_view' %}"><button>My Cart</button></a>
+    </div>
+</div>
 {% endblock %}

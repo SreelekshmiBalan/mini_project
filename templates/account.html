@@ -3,56 +3,84 @@
 
 {% block extra_css %}
 <style>
-    *{
-        padding: 0px;
-        margin: 0px;
-    }
-
-    body {
+    .profile-background {
         background-image: url("{% static 'images/shopping cartoon.jpg' %}");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
         min-height: 100vh;
+        display: flex;
+        align-items: flex-end; 
+        justify-content: flex-end; 
+        margin-top: 0px;
     }
-    .main{
-        padding: 0;
-        background-color: white;
-        border-radius: 7px;
+
+    .main {
+        background-color: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        margin: 20px;
+        margin-top: 0px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        width: 450px;
     }
-    .main form{
-        padding: 15px;
+
+    form input, form select {
+        margin-bottom: 15px;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    form label {
+        font-weight: bold;
+        margin-bottom: 2px;
+        display: block;
+    }
+
+    form div {
+        margin-bottom: 2px;
+    }
+
+    form button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
         border-radius: 5px;
-        justify-content: center;
-        margin-left: 500px;
-        margin-right: 500px;
+        cursor: pointer;
+        
     }
-    form input{
-        margin: 7px;
-        height: 25px;
+
+    form button:hover {
+        background-color: #0056b3;
     }
-    form{
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-
-<div >
+<div class="profile-background">
+    <div >
     <div class="main">
-        <form action="">
+        <form action="" method="post">
             <div>
                 <h2>My Profile Edit</h2>
             </div>
-            <div>
+            <div style="display: flex; gap: 195px;">
                 <div><label for="">Name</label></div>
-                <div>
-                    <input type="text" name="username" placeholder="Name" value="user.username">
-                </div>
                 <div><label for="">Gender</label></div>
+            </div>
+            <div style="display: flex; gap: 16px;">
                 <div>
-                    <select name="gender" id="">
+                    <input type="text" name="username" placeholder="Name" value="{{user.username}}" style="width: 240px; margin-bottom: 15px; margin-top: 0px;">
+                </div>
+                <div>
+                    <select name="gender" id="" style="margin-top: 0px; height: 36px; width: 140px;">
                         <option value="">Please select</option>
                         <option value="female">Female</option>
                         <option value="male">Male</option>
@@ -60,54 +88,64 @@
                     </select>
                 </div>
             </div>
-            <div>
+            <div style="display: flex; gap: 90px;">
                 <div><label for="">Birth Date</label></div>
                 <div>
-                    <input type="date" name="birth_date">
+                    <label for="">Email</label>
+                </div>
+            </div>
+            <div style="display:flex; gap: 16px;">
+                <div>
+                    <input type="date" name="birth_date" style="width: 130px; margin-bottom: 15px; margin-top: 0px;">
                 </div>
                 <div>
+                    <input type="email" name="email" value="{% if user.email %}{{user.email}}{% endif %}" placeholder="Email" style="width: 252px; margin-bottom: 15px; margin-top: 0px;">
+                </div>
+            </div>
+                
+                <div>
                     <div>
+                        <label for="" style="margin-bottom: 0px;">Address</label>
+                    </div>
+                    <div style="display: flex; gap: 16px;">
                         <div>
-                            <label for="">Email</label>
+                            <input type="text" name="address_line1" placeholder="Door No, Street">
                         </div>
                         <div>
-                            <input type="email" name="email" value="user.email">
+                            <input type="text" name="address_line2" placeholder="City">
                         </div>
+                    </div>
+                    <div style="display: flex; gap: 16px;">
+                        <div>
+                            <input type="text" name="district" placeholder="District" style="margin-bottom: 15px; margin-top: 0px;">
+                        </div>
+                        <div>
+                            <input type="text" name="state" placeholder="State" style="margin-bottom: 15px; margin-top: 0px;">
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 135px;">
+                    <div>
+                        <label for="">Pin Number</label>
                     </div>
                     <div>
                         <label for="">Phone Number</label>
                     </div>
+                </div>
+                <div style="display: flex; gap: 16px;">
                     <div>
-                        <input type="text" name="phone">
+                        <input type="text" name="postal_code" placeholder="Postal Code" style="width: 185px; margin-bottom: 15px; margin-top: 0px;">
+                    </div>
+                    <div>
+                        <input type="text" name="phone" placeholder="Phone" style="width: 202px; margin-bottom: 15px; margin-top: 0px;">
                     </div>
                 </div>
                 <div>
-                    <div>
-                        <label for="">Address</label>
-                    </div>
-                    <div>
-                        <input type="text" name="address_line1" placeholder="Door No, Street">
-                    </div>
-                    <div>
-                        <input type="text" name="address_line2" placeholder="City">
-                    </div>
-                    <div>
-                        <div>
-                            <input type="text" name="district" placeholder="District">
-                        </div>
-                        <div>
-                            <input type="text" name="state" placeholder="State">
-                        </div>
-                    </div>
-                    <div>
-                        <input type="text" name="Postal Code" placeholder="Postal Code">
-                    </div>
+                    <a href=""><button>Submit</button></a>
                 </div>
-            </div>
-            <div>
-                <a href=""><button>Submit</button></a>
             </div>
         </form>
     </div>
+</div>
 </div>
 {% endblock %}

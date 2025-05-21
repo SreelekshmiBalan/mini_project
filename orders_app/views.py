@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Order, OrderItem
 from cart_app.models import Cart
 from django.utils import timezone
@@ -53,6 +53,7 @@ def verify_payment(request):
             'razorpay_order_id': razorpay_order_id,
             'razorpay_payment_id': razorpay_payment_id,
             'razorpay_signature': razorpay_signature
+            
         }
 
         try:
@@ -100,5 +101,14 @@ def verify_payment(request):
                 'error': 'Payment verification failed',
             })
 
+def order_detail(request, order_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    return render(request, 'order_detail.html', {'order': order})
 
-    
+def my_orders(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    orders = Order.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'my_orders.html', {'orders': orders})

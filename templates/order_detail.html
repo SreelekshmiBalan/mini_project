@@ -1,0 +1,60 @@
+{% extends 'home_nav.html' %}
+
+{% block extra_css %}
+<style>
+.order-status-container {
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    width: 100%;
+    margin: 20px 0;
+    padding-left: 25px;
+}
+
+.status-step {
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 40px;
+    color: white;
+    transition: all 0.3s ease;
+    height: 40px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.status-step.done {
+    background-color:goldenrod;
+}
+
+.status-step.current {
+    background-color: darkred;
+    border: 3px solid #500505;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.status-step.pending {
+    background-color: grey;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h2 style="padding-left: 18px; font-family: Georgia, 'Times New Roman', Times, serif; color: darkred;">Track Your Order</h2>
+<p style="padding-left: 25px;">Order ID: {{ order.id }}</p>
+<p style="padding-left: 25px;">Date: {{ order.created_at|date:"M d, Y H:i" }}</p>
+<p style="padding-left: 25px;">Total: ₹{{ order.total_amount }}</p>
+
+<div class="order-status-container">
+    <div class="status-step {% if order.status == 'Order placed' %}current{% elif order.status == 'Processing' or order.status == 'Shipped' or order.status == 'Delivered' %}done{% else %}pending{% endif %}">
+        Order Placed
+    </div>
+    <div class="status-step {% if order.status == 'Processing' %}current{% elif order.status == 'Shipped' or order.status == 'Delivered' %}done{% else %}pending{% endif %}">
+        Processing
+    </div>
+    <div class="status-step {% if order.status == 'Shipped' %}current{% elif order.status == 'Delivered' %}done{% else %}pending{% endif %}">
+        Shipped
+    </div>
+    <div class="status-step {% if order.status == 'Delivered' %}current{% else %}pending{% endif %}">
+        Delivered
+    </div>
+</div>
+{% endblock %}

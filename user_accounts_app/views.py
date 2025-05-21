@@ -112,3 +112,24 @@ def set_new_password(request):
                 messages.error(request,'Password doesnot match')
         return render(request,'set_new_password.html',{'email':email})               
     return render(request,'set_new_password.html',{'email':email})
+
+def ProfileEdit(request):
+    if request.method=='POST':
+        Username=request.POST['username']
+        Gender=request.POST['gender']
+        BirthDate=request.POST['birth_date']
+        Email=request.POST['email']
+        Phone=request.POST['phone']
+        AddressLine1=request.POST['address_line1']
+        AddressLine2=request.POST['address_line2']
+        District=request.POST['district']
+        State=request.POST['state']
+        PostalCode=request.POST['postal_code']
+        user=Account.object.create(username=Username,gender=Gender,birth_date=BirthDate,email=Email,phone=Phone,address_line_1=AddressLine1,address_line_2=AddressLine2,district=District,state=State,pin_code=PostalCode)
+        user.save()
+    else:
+        return render(request,'account.html')
+    
+def Profile(request):
+    return render(request,'my_profile.html')
+

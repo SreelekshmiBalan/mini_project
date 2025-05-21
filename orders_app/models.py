@@ -24,7 +24,7 @@ class Order(models.Model):
     razorpay_payment_id = models.CharField(max_length=100, blank=True, null=True)
     razorpay_signature = models.CharField(max_length=100, blank=True, null=True)
     def __str__(self):
-        return self.user.username
+        return f"Order #{self.id} by {self.user.username if self.user else 'Unknown User'}"
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')

@@ -20,7 +20,7 @@ class Account(AbstractUser):
     pin_code = models.IntegerField(null=True, blank=True)  
     is_active = models.BooleanField(default=True)
     def __str__(self):
-        return self.username
+        return self.username if self.username else "Unnamed User"
     
 
 

@@ -1,0 +1,76 @@
+{% extends 'home_nav.html' %}
+
+{% block extra_css %}
+<style>
+.order-status-container {
+      display: flex;
+      flex-direction:row;
+      gap: 0px;
+      width: 100%;
+      margin: 20px 0;
+  }
+
+.status-step {
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 45px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.status-step.done {
+    background-color: green;
+}
+
+.status-step.current {
+    background-color: blue;
+    border: 3px solid #000;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.status-step.pending {
+    background-color: grey;
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+<h2 style="padding-left: 18px; font-family: Georgia, 'Times New Roman', Times, serif; color: darkred;">My Orders</h2>
+
+{% if orders %}
+    <ul>
+    {% for order in orders %}
+        <li>
+            <strong>Order #{{ order.id }}</strong><br>
+            <p>Status: {{ order.status }}</p>
+            <p>Total: ₹{{ order.total_amount }}</p>
+            <p>Shipping to: {{ order.shipping_address }}</p>
+            <p>Paid: {{ order.is_paid }}</p>
+
+            <h3 style="padding-left: 18px; font-family: Georgia, 'Times New Roman', Times, serif; color: rgb(194, 142, 11);">Items</h3>
+        <ul>
+        {% for item in order.items.all %}
+        <li>{{ item.quantity }} x {{ item.product.Name }} (Size: {{ item.size }}) – ₹{{ item.price }}</li>
+        {% endfor %}
+        </ul>
+            <br>
+            <a href="{% url 'orderdetail' order.id %}">Track Order</a>
+        </li>
+        <hr>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>You haven't placed any orders yet.</p>
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

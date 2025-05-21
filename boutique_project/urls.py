@@ -28,12 +28,14 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
-    # path('accounts/', include('allauth.urls')),
-    # path('logout', LogoutView.as_view()),
+    path('accounts/', include('allauth.urls')),
     path('',product_view.LogHome,name='LogHome'),
     path('home',product_view.Home,name='home'),
     path('productview/<int:id>/', product_view.productview, name='productview'),
+    path('productviewlogin/<int:id>/', product_view.productviewlogin, name='productviewlogin'),
     path('login',user_view.LogPage,name='login'),
+    path('profileedit',user_view.ProfileEdit,name='profileedit'),
+    path('profile',user_view.Profile,name='profile'),
     path('passwordreset',user_view.password_reset_request,name='passwordreset'),
     path('verifyotp',user_view.verify_otp,name='verifyotp'),
     path('setnewpassword',user_view.set_new_password,name='setnewpassword'),
@@ -54,6 +56,8 @@ urlpatterns = [
     path('placeorder', order_view.PlaceOrder, name='placeorder'),
     path('verify-payment/', order_view.verify_payment, name='verify_payment'),
     path('order-success/<int:order_id>/', order_view.OrderSuccess, name='order_success'),
+    path('orderdetails/<int:order_id>', order_view.order_detail, name='orderdetail'),
+    path('my-orders/', order_view.my_orders, name='my_orders'),
 
     
 ]

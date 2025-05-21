@@ -1,5 +1,6 @@
 {% extends 'login_nav.html' %}
 {% load static %}
+{% load socialaccount %}
 
 {% block extra_css %}
 <style>
@@ -75,7 +76,7 @@
                     <span>OR</span>
                     <hr>
                 </div>                  
-                <div><a href="">Log in with Google</a></div>
+                <div><a href="{% provider_login_url 'google' %}">Log in with Google</a></div>
                 <div style="padding-top: 140px; padding-left: 30px;">Don't Have an Account?<a href="signup">Sign Up</a></div>
             </form>
         </div>

@@ -43,10 +43,11 @@ INSTALLED_APPS = [
     'cart_app',
     'wishlist_app',
     'orders_app',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'boutique_project.urls'
@@ -132,10 +133,19 @@ AUTH_PASSWORD_VALIDATORS = [
 #     }
 # }
 
-# SITE_ID = 2
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -162,10 +172,7 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='user_accounts_app.Account'
-# AUTHENTICATION_BACKENDS=[
-#     'django.contrib.auth.backends.ModelBackend',
-#     'allauth.account.auth_backkends.AuthenticationBackend'
-# ]
+
 
 RAZORPAY_KEY_ID = 'rzp_test_ueRmFiHKeH2UFJ'
 RAZORPAY_KEY_SECRET = '2GU390infRCa2R5x2GIvCIhN'
