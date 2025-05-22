@@ -16,43 +16,52 @@
     
 
     <style>
-        .custom-navbar {
-    background-color: rgb(47, 12, 12);
-    border: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* soft bottom shadow */
-  }
-  .custom-navbar .navbar-brand,
-  .custom-navbar .nav > li > a {
-    color: #fcfcfc;
-}
-.custom-navbar .nav > li > a:hover,
-.custom-navbar .nav > li.active > a {
-    color: #d3a31f; /* highlight color */
-    font-weight: bold;
-    background: rgb(47, 12, 12);
-  }
-  .footer-link {
-  color: #aaa;
-  text-decoration: none;
-  display: block;
-  margin-bottom: 8px;
-  transition: all 0.3s ease;
-}
-.footer-link:hover {
-  color: #686666;;
-  text-decoration: underline;
-}
-.social-icon {
-  font-size: 18px;
-  color: #686666;
-  margin-right: 15px;
-  transition: all 0.3s ease;
-}
-.social-icon:hover {
-  color: #686666;
-}
+    main {
+      padding-top: 0;
+      margin-top: 0;
+    }
+    body{
+      margin: 0;
+      padding: 0;
+      background-color: #f8c63c;
+    }
+    .custom-navbar {
+      background-color: rgb(47, 12, 12);
+      border: none;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    }
+    .custom-navbar .navbar-brand,
+    .custom-navbar .nav > li > a {
+      color: #fcfcfc;
+    }
+    .custom-navbar .nav > li > a:hover,
+    .custom-navbar .nav > li.active > a {
+        color: #d3a31f; 
+        font-weight: bold;
+        background: rgb(47, 12, 12);
+    }
+    .footer-link {
+        color: #aaa;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 8px;
+        transition: all 0.3s ease;
+    }
+    .footer-link:hover {
+      color: #686666;;
+      text-decoration: underline;
+    }
+    .social-icon {
+      font-size: 18px;
+      color: #686666;
+      margin-right: 15px;
+      transition: all 0.3s ease;
+    }
+    .social-icon:hover {
+      color: #686666;
+    }
 
-  </style>
+    </style>
 
   {% block extra_css %}
   {% endblock %}
@@ -100,6 +109,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="{% url 'profile' %}">View Profile</a></li>
                   <li><a href="{% url 'my_orders' %}">My Orders</a></li>
+                  <li><a href="{% url 'logout' %}">Logout</a></li>
                 </ul>
               </li>              
             </ul>

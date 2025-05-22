@@ -114,22 +114,27 @@ def set_new_password(request):
     return render(request,'set_new_password.html',{'email':email})
 
 def ProfileEdit(request):
+    userdata=Account.objects.get(id=request.user.id)
     if request.method=='POST':
-        Username=request.POST['username']
-        Gender=request.POST['gender']
-        BirthDate=request.POST['birth_date']
-        Email=request.POST['email']
-        Phone=request.POST['phone']
-        AddressLine1=request.POST['address_line1']
-        AddressLine2=request.POST['address_line2']
-        District=request.POST['district']
-        State=request.POST['state']
-        PostalCode=request.POST['postal_code']
-        user=Account.object.create(username=Username,gender=Gender,birth_date=BirthDate,email=Email,phone=Phone,address_line_1=AddressLine1,address_line_2=AddressLine2,district=District,state=State,pin_code=PostalCode)
-        user.save()
+        userdata.username=request.POST.get('username')
+        userdata.gender=request.POST.get('gender')
+        userdata.birth_date=request.POST.get('birth_date')
+        userdata.email=request.POST.get('email')
+        userdata.phone=request.POST.get('phone')
+        userdata.address_line_1=request.POST.get('address_line1')
+        userdata.address_line_2=request.POST.get('address_line2')
+        userdata.district=request.POST.get('district')
+        userdata.state=request.POST.get('state')
+        userdata.pin_code=request.POST.get('postal_code')
+        userdata.save()
+        return redirect(request,'my_profile.html')
     else:
         return render(request,'account.html')
     
 def Profile(request):
     return render(request,'my_profile.html')
+
+def LogoutPage(request):
+    logout(request)
+    return redirect('LogHome')
 

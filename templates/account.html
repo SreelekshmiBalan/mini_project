@@ -8,21 +8,27 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        min-height: 100vh;
+        min-height: 80vh;
         display: flex;
         align-items: flex-end; 
         justify-content: flex-end; 
         margin-top: 0px;
+        padding-top: 0px;
+        padding-bottom: 30px;
+        margin-bottom: 0px;
     }
 
     .main {
         background-color: rgba(255, 255, 255, 0.95);
         padding: 30px;
         margin: 20px;
-        margin-top: 0px;
+        margin-top: 20px;
+        padding-top: 10px;
         border-radius: 10px;
         box-shadow: 0 0 15px rgba(0,0,0,0.3);
         width: 450px;
+        height: 530px;
+        margin-right: 40px;
     }
 
     form input, form select {
@@ -49,6 +55,9 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        align-self: center;
+        display: block;
+        margin: auto;
         
     }
 
@@ -59,6 +68,8 @@
     h2 {
         text-align: center;
         margin-bottom: 20px;
+        font-family:'Times New Roman', Times, serif;
+        color: rgb(28, 0, 139);
     }
 </style>
 {% endblock %}
@@ -68,6 +79,7 @@
     <div >
     <div class="main">
         <form action="" method="post">
+            {% csrf_token %}
             <div>
                 <h2>My Profile Edit</h2>
             </div>
@@ -77,14 +89,14 @@
             </div>
             <div style="display: flex; gap: 16px;">
                 <div>
-                    <input type="text" name="username" placeholder="Name" value="{{user.username}}" style="width: 240px; margin-bottom: 15px; margin-top: 0px;">
+                    <input type="text" name="username" placeholder="Name" value="{% if user.username %}{{user.username}}{% endif %}" style="width: 240px; margin-bottom: 15px; margin-top: 0px;">
                 </div>
                 <div>
-                    <select name="gender" id="" style="margin-top: 0px; height: 36px; width: 140px;">
+                    <select name="gender" id="" style="margin-top: 0px; height: 36px; width: 140px;" value="{% if user.gender %}{{user.gender}}{% endif %}"">
                         <option value="">Please select</option>
-                        <option value="female">Female</option>
-                        <option value="male">Male</option>
-                        <option value="other">Other</option>
+                        <option value="F">Female</option>
+                        <option value="M">Male</option>
+                        <option value="O">Other</option>
                     </select>
                 </div>
             </div>
@@ -96,7 +108,7 @@
             </div>
             <div style="display:flex; gap: 16px;">
                 <div>
-                    <input type="date" name="birth_date" style="width: 130px; margin-bottom: 15px; margin-top: 0px;">
+                    <input type="date" name="birth_date" style="width: 130px; margin-bottom: 15px; margin-top: 0px;" value="{% if user.birth_date %}{{user.birth_date}}{% endif %}">
                 </div>
                 <div>
                     <input type="email" name="email" value="{% if user.email %}{{user.email}}{% endif %}" placeholder="Email" style="width: 252px; margin-bottom: 15px; margin-top: 0px;">
@@ -109,18 +121,18 @@
                     </div>
                     <div style="display: flex; gap: 16px;">
                         <div>
-                            <input type="text" name="address_line1" placeholder="Door No, Street">
+                            <input type="text" name="address_line1" placeholder="Door No, Street" value="{% if user.address_line1 %}{{user.address_line1}}{% endif %}">
                         </div>
                         <div>
-                            <input type="text" name="address_line2" placeholder="City">
+                            <input type="text" name="address_line2" placeholder="City" value="{% if user.address_line2 %}{{user.address_line2}}{% endif %}">
                         </div>
                     </div>
                     <div style="display: flex; gap: 16px;">
                         <div>
-                            <input type="text" name="district" placeholder="District" style="margin-bottom: 15px; margin-top: 0px;">
+                            <input type="text" name="district" placeholder="District" style="margin-bottom: 15px; margin-top: 0px;" value="{% if user.district %}{{user.district}}{% endif %}">
                         </div>
                         <div>
-                            <input type="text" name="state" placeholder="State" style="margin-bottom: 15px; margin-top: 0px;">
+                            <input type="text" name="state" placeholder="State" style="margin-bottom: 15px; margin-top: 0px;" value="{% if user.state %}{{user.state}}{% endif %}">
                         </div>
                     </div>
                 </div>
@@ -134,10 +146,10 @@
                 </div>
                 <div style="display: flex; gap: 16px;">
                     <div>
-                        <input type="text" name="postal_code" placeholder="Postal Code" style="width: 185px; margin-bottom: 15px; margin-top: 0px;">
+                        <input type="text" name="postal_code" placeholder="Postal Code" style="width: 185px; margin-bottom: 15px; margin-top: 0px;" value="{% if user.pin_code %}{{user.pin_code}}{% endif %}">
                     </div>
                     <div>
-                        <input type="text" name="phone" placeholder="Phone" style="width: 202px; margin-bottom: 15px; margin-top: 0px;">
+                        <input type="text" name="phone" placeholder="Phone" style="width: 202px; margin-bottom: 15px; margin-top: 0px;" value="{% if user.phone %}{{user.phone}}{% endif %}">
                     </div>
                 </div>
                 <div>

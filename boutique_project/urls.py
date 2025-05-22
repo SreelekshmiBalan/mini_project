@@ -34,6 +34,7 @@ urlpatterns = [
     path('productview/<int:id>/', product_view.productview, name='productview'),
     path('productviewlogin/<int:id>/', product_view.productviewlogin, name='productviewlogin'),
     path('login',user_view.LogPage,name='login'),
+    path('logout',user_view.LogoutPage,name='logout'),
     path('profileedit',user_view.ProfileEdit,name='profileedit'),
     path('profile',user_view.Profile,name='profile'),
     path('passwordreset',user_view.password_reset_request,name='passwordreset'),
