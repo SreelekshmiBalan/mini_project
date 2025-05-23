@@ -13,6 +13,7 @@
           box-shadow: 0 2px 8px rgba(0,0,0,0.05);
           transition: transform 0.7s;
           text-align: center;
+          margin-bottom: 30px;
       }
       .category-card:hover {
           transform: translateY(-7px);
@@ -196,6 +197,24 @@
     </div>
 </div>
 
+<!-- <div>
+  <div style="display: flex; width: 100%;">
+  <div style="
+      flex: 1;
+      background-image: url('{% static 'images/1815.jpg' %}');
+      background-size: cover;
+      background-position: center;
+      height: 350px;
+  "></div>
+  <div style="flex: 1; background-image: url('{% static "images/1815.jpg" %}'); background-size: cover; background-position: center; height: 350px;"></div>
+  <div style="flex: 1; background-image: url('{% static 'images/18151.jpg' %}'); background-size: cover; background-position: center; height: 350px;"></div>
+
+  <p>Fashions Fade,
+     Style 
+     is Eternal
+  </p>
+</div> -->
+
 <div class="container my-5">
     <h2 class="text-center mb-4" style="padding: 20px;">Top Categories</h2>
     <div class="row g-2">
@@ -208,6 +227,10 @@
         </div>
         {% endfor %}
     </div>
+</div>
+
+<div>
+  <img src="{% static 'images/meroon_flower.jpg' %}"style="width: 100%; height: 350px; " alt="">
 </div>
 
 <div class="container my-5">

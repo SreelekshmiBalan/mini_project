@@ -67,7 +67,7 @@
           </div>
           <ul class="nav navbar-nav">
             <li class="active" style="align-items: center; padding-top: 15px;"><a href="{% url 'LogHome' %}">Home</a></li>
-            <li style="align-items: center; padding-top: 15px;"><a href="#">About</a></li>
+            <li style="align-items: center; padding-top: 15px;"><a href="{% url 'about' %}">About</a></li>
             <li style="align-items: center; padding-top: 15px;"><a href="{% url 'shop' %}">Shop</a></li>
                         <li class="{% if request.resolver_match.url_name == 'categoryhome' %}active{% endif %}" style="align-items: center; padding-top: 15px;">
               <a href="{% url 'categoryhome' %}">Shop by Category</a>
@@ -123,20 +123,8 @@
               <h5 style="color: #373737;">Discover</h5>
               <ul class="list-unstyled">
                 <li><a href="{% url 'LogHome' %}" class="footer-link">Home</a></li>
-                <li><a href="#" class="footer-link">About Us</a></li>
-                <li><a href="#" class="footer-link">Portfolio</a></li>
-                <li><a href="#" class="footer-link">Services</a></li>
+                <li><a href="{% url 'about' %}" class="footer-link">About Us</a></li>
                 <li><a href="#" class="footer-link">Contact</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-2">
-              <h5 style="color: #373737;">About</h5>
-              <ul class="list-unstyled">
-                <li><a href="#" class="footer-link">Clients</a></li>
-                <li><a href="#" class="footer-link">Team</a></li>
-                <li><a href="#" class="footer-link">Career</a></li>
-                <li><a href="#" class="footer-link">Testimonials</a></li>
-                <li><a href="#" class="footer-link">Journal</a></li>
               </ul>
             </div>
             <div class="col-sm-2">
@@ -144,7 +132,6 @@
               <ul class="list-unstyled">
                 <li><a href="#" class="footer-link">Privacy Policy</a></li>
                 <li><a href="#" class="footer-link">Terms & Conditions</a></li>
-                <li><a href="#" class="footer-link">Partners</a></li>
               </ul>
             </div>
             <div class="col-sm-3">

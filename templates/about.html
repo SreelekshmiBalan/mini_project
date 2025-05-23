@@ -2,7 +2,46 @@
 {% load static %}
 
 {% block extra_css %}
+<style>
+    .about-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        text-align: center;
+    }
+    .about-title {
+        font-size: 50px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #b08968;
+    }
+    .about-subtitle {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 22px;
+    }
+    .about-founder {
+        font-style: italic;
+        margin-top: 40px;
+        font-size: 15px;
+        color: #888;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
+<div class="about-container">
+    <h1 class="about-title" >About The Golden Hanger</h1>
+    <p class="about-subtitle">
+        Welcome to <strong>The Golden Hanger</strong>, a boutique crafted exclusively for women who appreciate elegance, authenticity, and timeless fashion. 
+        We believe that style is more than clothing — it's a reflection of individuality and confidence.
+    </p>
+    <p style="font-size: 16px;">
+        Our handpicked collections feature a harmonious blend of tradition and trend, curated with love for every occasion — from everyday grace to celebration-ready glam. 
+        Whether you're looking for a classic silhouette or a bold statement piece, our boutique is here to make you feel special.
+    </p>
+    <p class="about-founder">
+        Founded with passion by <strong>Sreelekshmi Balan Anoop</strong>, The Golden Hanger is more than a store — it's a celebration of femininity, strength, and personal style.
+    </p>
+</div>
 {% endblock %}

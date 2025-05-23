@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from cart_app.models import Cart
 from wishlist_app.models import WishLists
+from django.db.models import Q
 
 # Create your views here.
 def LogHome(request):
@@ -115,6 +116,11 @@ def About(request):
 
 def SizeChart(request):
     return render(request,'size_chart.html')
+
+def Search(request):
+    query = request.GET.get('searchname')
+    results = Product.objects.filter( Q(Name__icontains=query) | Q(Type__icontains=query)) if query else []
+    return render(request, 'search.html', {'query': query, 'results': results})
 
 
 

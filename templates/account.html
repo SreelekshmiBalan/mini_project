@@ -31,6 +31,12 @@
         margin-right: 40px;
     }
 
+    body{
+      margin: 0;
+      padding: 0;
+      background-color: #f8c63c;
+    }
+
     form input, form select {
         margin-bottom: 15px;
         padding: 8px;
@@ -78,7 +84,7 @@
 <div class="profile-background">
     <div >
     <div class="main">
-        <form action="" method="post">
+        <form action="{% url 'profileedit' %}" method="post">
             {% csrf_token %}
             <div>
                 <h2>My Profile Edit</h2>
