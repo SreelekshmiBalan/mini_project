@@ -146,14 +146,14 @@
       <img src="{% static 'carousel_img/slide2.jpg' %}" alt="Slide 2" style="width:100%; height:500px; object-fit:cover;">
       <div class="carousel-caption caption2">
         <h3>Scroll Through Our Categories Specially Curated For You</h3>
-        <a href=""><button style="background-color: rgb(88, 18, 4); color: white; text-decoration: none; border: 0; border-radius: 25px; height: 35px; width: 80px; display: block; margin: auto;">Categories</button></a>
+        <a href="{% url 'categoryhomelog' %}"><button style="background-color: rgb(88, 18, 4); color: white; text-decoration: none; border: 0; border-radius: 25px; height: 35px; width: 80px; display: block; margin: auto;">Categories</button></a>
       </div>
     </div>
 
     <div class="item">
       <img src="{% static 'carousel_img/slide3.jpg' %}" alt="Slide 3" style="width:100%; height:500px; object-fit:cover;">
       <div class="carousel-caption caption3">
-        <a href="{% url 'shop' %}"><button class="buttonshop" role="button">Shop Now</button></a>
+        <a href="{% url 'shoplog' %}"><button class="buttonshop" role="button">Shop Now</button></a>
       </div>
     </div>
   </div>
