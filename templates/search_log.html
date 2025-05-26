@@ -1,0 +1,53 @@
+{% extends 'login_nav.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+  .category-card {
+          /* width: 350px;
+          height: 400px; */
+          border: 1px solid #eee;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+          transition: transform 0.7s;
+          text-align: center;
+          margin-bottom: 28px;
+      }
+      .category-card img {
+          width: 200px;
+          height: 250px;
+          object-fit: cover;
+      }
+      .category-name {
+          font-size: 18px;
+          font-weight: 600;
+          padding: 15px 10px;
+          color: #333;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+          max-width: 100%;
+          cursor: pointer;
+      }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center mb-4" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; padding-bottom: 15px; color: maroon;">Search Results for "{{ query }}"</h2>
+    <div class="row g-2">
+        {% for item in results %}
+        <div class="col-md-3">
+            <div class="category-card">
+                <img src="{{ item.images.first.Image.url }}" alt="{{ product.Name }}">
+                <a href="{% url 'productview' item.pk %}"><div class="category-name">{{ item.Name }}</div></a>
+            </div>
+        </div>
+        {% empty %}
+        <li>No results found.</li>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

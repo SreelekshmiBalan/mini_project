@@ -133,6 +133,11 @@ def Search(request):
     results = Product.objects.filter( Q(Name__icontains=query) | Q(Type__icontains=query)) if query else []
     return render(request, 'search.html', {'query': query, 'results': results})
 
+def SearchLog(request):
+    query = request.GET.get('searchname')
+    results = Product.objects.filter( Q(Name__icontains=query) | Q(Type__icontains=query)) if query else []
+    return render(request, 'search_log.html', {'query': query, 'results': results})
+
 def PrivacyPolicy(request):
     return render(request,'privacy_policy.html')
 

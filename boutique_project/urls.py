@@ -34,6 +34,7 @@ urlpatterns = [
     path('productview/<int:id>/', product_view.productview, name='productview'),
     path('productviewlogin/<int:id>/', product_view.productviewlogin, name='productviewlogin'),
     path('search',product_view.Search,name='search'),
+    path('searchlog',product_view.SearchLog,name='searchlog'),
     path('about',product_view.About,name='about'),
     path('aboutlog',product_view.AboutLog,name='aboutlog'),
     path('privacy',product_view.PrivacyPolicy,name='privacy'),
