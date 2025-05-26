@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Golden Hanger</title>
+    <link rel="icon" type="image/png" sizes="128x128" href="{% static 'images/favicon.png' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -152,35 +153,21 @@
               <h5 style="color: #373737;">Discover</h5>
               <ul class="list-unstyled">
                 <li><a href="{% url 'LogHome' %}" class="footer-link">Home</a></li>
-                <li><a href="#" class="footer-link">About Us</a></li>
-                <li><a href="#" class="footer-link">Portfolio</a></li>
-                <li><a href="#" class="footer-link">Services</a></li>
-                <li><a href="#" class="footer-link">Contact</a></li>
-              </ul>
-            </div>
-            <div class="col-sm-2">
-              <h5 style="color: #373737;">About</h5>
-              <ul class="list-unstyled">
-                <li><a href="#" class="footer-link">Clients</a></li>
-                <li><a href="#" class="footer-link">Team</a></li>
-                <li><a href="#" class="footer-link">Career</a></li>
-                <li><a href="#" class="footer-link">Testimonials</a></li>
-                <li><a href="#" class="footer-link">Journal</a></li>
+                <li><a href="{% url 'about' %}" class="footer-link">About Us</a></li>
               </ul>
             </div>
             <div class="col-sm-2">
               <h5 style="color: #373737;;">Help</h5>
               <ul class="list-unstyled">
-                <li><a href="#" class="footer-link">Privacy Policy</a></li>
-                <li><a href="#" class="footer-link">Terms & Conditions</a></li>
-                <li><a href="#" class="footer-link">Partners</a></li>
+                <li><a href="{% url 'privacy' %}" class="footer-link">Privacy Policy</a></li>
+                <li><a href="{% url 'terms' %}" class="footer-link">Terms & Conditions</a></li>
               </ul>
             </div>
             <div class="col-sm-3">
               <h5 style="color: #373737;;">Connect With Us</h5>
-              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+              <a href="https://www.instagram.com/s_r_e_e__b_a_l_a" class="social-icon"><i class="fab fa-instagram"></i></a>
+              <a href="https://wa.me/919061721647" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+              <a href="mailto:sreelekshmibalan01@gmail.com" class="social-icon"><i class="fab fa-google"></i></a>
             </div>
       
           </div>

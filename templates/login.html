@@ -29,7 +29,15 @@
         margin-left: 25px;
         margin-right: 50px;
         height: 300px;
+        width: 190px;
 }
+
+form input{
+        margin-bottom: 15px;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
 .or-divider {
   display: flex;
   align-items: center;
@@ -50,6 +58,23 @@
   font-weight: 600;
 }
 
+.sub-button {
+        padding: 10px 20px;
+        background: rgba(248, 188, 35, 0.8);
+        color: maroon;
+        font-weight: bold;
+        border-width: 1px;
+        border:rgb(135, 107, 37);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        height: 35px;
+    }
+
+    .sub-button:hover {
+        background: rgba(248, 188, 35, 1);
+    }
+
 </style>
 {% endblock %}
 
@@ -58,13 +83,12 @@
         <div class="main1">
             <form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
-                <h2 style="color: maroon; font-family:Georgia, 'Times New Roman', Times, serif ; font-weight: bold; padding-bottom: 30px;">USER SIGN-IN</h2>
+                <h3 style="color: maroon; font-family:Georgia, 'Times New Roman', Times, serif ; font-weight: bold; padding-bottom: 30px;">USER SIGN-IN</h3>
                 <div style="margin-bottom: 20px;"><input type="text" name="username" placeholder="Username"></div>
                 <div><input type="password" name="password" placeholder="Password"></div>
                 <div style="padding-top: 0px; padding-left: 68px;"><a href="setnewpassword">Forgot Password?</a></div>
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <button type="submit">Login</button>
-                    
+                    <button class="sub-button" type="submit">Login</button>
                     {% if error %}
                       <span style="color: red; font-size: 14px;">
                         {{ error }}
@@ -80,11 +104,13 @@
                   <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" style="width: 18px; height: 18px;">
                   Sign in with Google
                 </a>
-                <div style="padding-top: 140px; padding-left: 30px;">Don't Have an Account?<a href="signup">Sign Up</a></div>
+                <div class="position-absolute w-100 text-center" style="padding-top: 100px;">
+                  <small>Don't Have an Account? <a href="{% url 'signup' %}">Sign Up</a></small>
+                </div>
             </form>
         </div>
         <div>
-            <img src="{% static 'images/InShot_20250410_100050248.jpg' %}" alt="" height="540px" width="360px" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
+            <img src="{% static 'images/InShot_20250410_100050248.jpg' %}" alt="" height="540px" width="325px" style="box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px;">
         </div>
     </div>
 {% endblock %}

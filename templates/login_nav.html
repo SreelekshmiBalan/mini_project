@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Golden Hanger</title>
+    <link rel="icon" type="image/png" sizes="128x128" href="{% static 'images/favicon.png' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -66,12 +67,10 @@
             </span>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active" style="align-items: center; padding-top: 15px;"><a href="{% url 'LogHome' %}">Home</a></li>
-            <li style="align-items: center; padding-top: 15px;"><a href="{% url 'about' %}">About</a></li>
-            <li style="align-items: center; padding-top: 15px;"><a href="{% url 'shop' %}">Shop</a></li>
-                        <li class="{% if request.resolver_match.url_name == 'categoryhome' %}active{% endif %}" style="align-items: center; padding-top: 15px;">
-              <a href="{% url 'categoryhome' %}">Shop by Category</a>
-            </li>
+            <li class="{% if request.resolver_match.url_name == 'LogHome' %}active{% endif %}" style="align-items: center; padding-top: 15px;"><a href="{% url 'LogHome' %}">Home</a></li>
+            <li class="{% if request.resolver_match.url_name == 'aboutlog' %}active{% endif %}" style="align-items: center; padding-top: 15px;"><a href="{% url 'aboutlog' %}">About</a></li>
+            <li class="{% if request.resolver_match.url_name == 'shoplog' %}active{% endif %}" style="align-items: center; padding-top: 15px;"><a href="{% url 'shoplog' %}">Shop</a></li>
+            <li class="{% if request.resolver_match.url_name == 'categoryhomelog' %}active{% endif %}" style="align-items: center; padding-top: 15px;"><a href="{% url 'categoryhomelog' %}">Shop by Category</a></li>
           </ul>
           <form class="navbar-form navbar-left" action="/action_page.php">
             <div class="input-group" style="align-items: center; padding-top: 15px; padding-left: 30px;">
@@ -92,8 +91,8 @@
       {% block content %}
       {% endblock %}
 
-      <footer class="footer" style="background-color: #f0d7d7; color: #686666; padding: 60px 0;">
-        <div class="container">
+      <footer class="footer" style="background-color:#f0d7d7; padding:60px 0; width:100%;">
+        <div class="container-fluid">
           <img src="{% static 'images/Logo_wo_bg.png' %}" alt="Logo" style="width: 120px;">
           <div class="row">
             <div class="col-sm-3">
@@ -123,24 +122,21 @@
               <h5 style="color: #373737;">Discover</h5>
               <ul class="list-unstyled">
                 <li><a href="{% url 'LogHome' %}" class="footer-link">Home</a></li>
-                <li><a href="{% url 'about' %}" class="footer-link">About Us</a></li>
-                <li><a href="#" class="footer-link">Contact</a></li>
+                <li><a href="{% url 'aboutlog' %}" class="footer-link">About Us</a></li>
               </ul>
             </div>
             <div class="col-sm-2">
               <h5 style="color: #373737;;">Help</h5>
               <ul class="list-unstyled">
-                <li><a href="#" class="footer-link">Privacy Policy</a></li>
-                <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+                <li><a href="{% url 'privacylog' %}" class="footer-link">Privacy Policy</a></li>
+                <li><a href="{% url 'termslog' %}" class="footer-link">Terms & Conditions</a></li>
               </ul>
             </div>
             <div class="col-sm-3">
-              <h5 style="color: #373737;;">Follow Us</h5>
-              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
+              <h5 style="color: #373737;;">Connect With Us</h5>
+              <a href="https://www.instagram.com/s_r_e_e__b_a_l_a" class="social-icon"><i class="fab fa-instagram"></i></a>
+              <a href="https://wa.me/919061721647" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+              <a href="mailto:sreelekshmibalan01@gmail.com" class="social-icon"><i class="fab fa-google"></i></a>
             </div>
       
           </div>

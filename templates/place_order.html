@@ -32,11 +32,23 @@
     <h4 class="text-right">Total: ₹{{ total }}</h4>
 
     <div class="form-group mt-4">
-        <label for="address">Shipping Address</label>
-        <textarea class="form-control" id="address" rows="3" required></textarea>
-    </div>
+    <label for="address">Shipping Address</label>
+    <textarea readonly class="form-control" rows="5">
+    {{ address1 }}
+    {{ address2 }}
+    {{ district }}, {{ state }}
+    PIN: {{ pincode }}
+    {{ phone }}
+    </textarea>
+    <!-- If you need to submit this address as a value in the form: -->
+    <input type="hidden" name="address"
+           value="{{ address1 }}, {{ address2 }}, {{ district }}, {{ state }}, PIN: {{ pin_code }}, {{ phone }}">
+</div>
 
-    <button id="rzp-button" class="btn btn-primary mt-3">Pay Now</button>
+    <div style="display: flex; gap: 10px;">
+        <a href="{% url 'address' %}" class="btn btn-success mt-3">Change Address</a>
+        <button id="rzp-button" class="btn btn-primary mt-3">Pay Now</button>
+    </div>
 </div>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>

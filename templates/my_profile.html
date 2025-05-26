@@ -66,13 +66,12 @@
     <div>{% if user.email %}{{user.email}}{% endif %}</div>
     <div><hr></div>
     <div style="color:dimgray; text-align: left;padding-bottom: 15px;">{% if user.address_line_1 %}Address{% endif %}</div>
-    <div>{% if user.address_line_1 %}{{user.address_line_1}}{% endif %}</div>
-    <div>{% if user.address_line_2 %}{{user.address_line_2}}{% endif %}</div>
-    <div>{% if user.district %}{{user.district}}{% endif %}</div>
-    <div>{% if user.state %}{{user.state}}{% endif %}</div>
-    <div>{% if user.pin_code %}{{user.pin_code}}{% endif %}</div>
-    <div>{% if user.phone %}{{user.phone}}{% endif %}</div>
-
+    <div style="text-align: left;">{% if user.address_line_1 %}{{user.address_line_1}}{% endif %}</div>
+    <div style="text-align: left;">{% if user.address_line_2 %}{{user.address_line_2}}{% endif %}</div>
+    <div style="text-align: left;">{% if user.district %}{{user.district}}{% endif %}, {% if user.state %}{{user.state}}{% endif %}</div>
+    <div style="text-align: left;">PIN: {% if user.pin_code %}{{user.pin_code}}{% endif %}</div>
+    <div style="text-align: left;">{% if user.phone %}{{user.phone}}{% endif %}</div>
+    <div><hr></div>
     <div class="profile-buttons">
         <a href="{% url 'profileedit' %}"><button>Edit Profile</button></a>
         <a href="{% url 'my_orders' %}"><button>My Orders</button></a>

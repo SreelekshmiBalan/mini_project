@@ -1,0 +1,103 @@
+{% extends 'login_nav.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .privacy-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        text-align: left;
+        font-size: 16px;
+        line-height: 1.8;
+        color: #444;
+    }
+
+    .privacy-title {
+        font-size: 40px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #b08968;
+        text-align: center;
+    }
+
+    .privacy-section-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #6f4e37;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .contact-box {
+        background-color: #fdf4ef;
+        border-left: 4px solid #b08968;
+        padding: 15px 20px;
+        border-radius: 6px;
+        margin-top: 20px;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="privacy-container">
+    <h1 class="privacy-title">Privacy Policy</h1>
+    <p><strong>Effective Date:</strong> May 26, 2025</p>
+
+    <p>Welcome to <strong>The Golden Hanger</strong>. We value your trust and are committed to protecting your privacy. This policy outlines how we handle your personal information when you interact with our website.</p>
+
+    <div class="privacy-section-title">1. Information We Collect</div>
+    <ul>
+        <li><strong>Personal Information:</strong> Name, email, phone number, addresses</li>
+        <li><strong>Order Details:</strong> Items purchased, transaction data</li>
+        <li><strong>Device Info:</strong> IP address, browser, session behavior</li>
+        <li><strong>Cookies:</strong> Used to enhance and personalize your experience</li>
+    </ul>
+
+    <div class="privacy-section-title">2. How We Use It</div>
+    <ul>
+        <li>To process orders and manage deliveries</li>
+        <li>To communicate order updates and promotional offers</li>
+        <li>To improve user experience and troubleshoot issues</li>
+        <li>To comply with legal requirements</li>
+    </ul>
+
+    <div class="privacy-section-title">3. Data Sharing</div>
+    <p>We do not sell your personal data. We only share information with trusted services (e.g., payment gateways, shipping providers) required to fulfill your orders.</p>
+
+    <div class="privacy-section-title">4. Your Choices</div>
+    <ul>
+        <li>Access, correct, or delete your personal info</li>
+        <li>Unsubscribe from marketing emails anytime</li>
+        <li>Request account/data deletion via contact</li>
+    </ul>
+
+    <div class="privacy-section-title">5. Cookies</div>
+    <p>Cookies help improve your browsing experience. You can choose to disable them in your browser settings, though this may affect certain features.</p>
+
+    <div class="privacy-section-title">6. Security</div>
+    <p>We implement industry-standard security measures, including SSL encryption, to protect your data. However, no method is 100% secure online.</p>
+
+    <div class="privacy-section-title">7. Third-Party Links</div>
+    <p>Our site may contain links to external websites. We are not responsible for their privacy practices or content.</p>
+
+    <div class="privacy-section-title">8. Children’s Privacy</div>
+    <p>We do not knowingly collect information from users under 13 years of age.</p>
+
+    <div class="privacy-section-title">9. Changes to This Policy</div>
+    <p>This Privacy Policy may be updated occasionally. Updates will be posted on this page with a revised effective date.</p>
+
+    <div class="privacy-section-title">10. Contact Us</div>
+    <div class="contact-box">
+        <p><strong>Email:</strong> support@thegoldenhanger.com</p>
+        <p><strong>Address:</strong> <div>Golden Hanger<br>
+                      Pukkattuppady Road<br>
+                      Toll Junction, Edappally<br>
+                      Kochi, Kerala 682036</div></p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'home_nav.html' %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .address-container {
+        display: flex;
+        width: fit-content;
+        margin: 50px auto;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .address-image img {
+        height: 100%;
+        width: 325px;
+        object-fit: cover;
+    }
+
+    .main {
+        background-color: rgba(255, 255, 255, 0.97);
+        padding: 30px;
+        width: 350px;
+    }
+
+    form input, form select {
+        margin-bottom: 10px;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        height: 30px;
+        width: 100%;
+    }
+
+    form label {
+        font-weight: bold;
+        margin-bottom: 2px;
+        display: block;
+        color: rgb(0, 0, 0);
+        font-family: monospace;
+    }
+
+    form div {
+        margin-bottom: 8px;
+    }
+
+    form button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: block;
+        margin: 20px auto 0 auto;
+    }
+
+    form button:hover {
+        background-color: #0056b3;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        color: rgb(28, 0, 139);
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="address-container">
+    <div class="address-image">
+        <img src="{% static 'images/mobile-app-location-digital-art.jpg' %}" alt="Location">
+    </div>
+    <div class="main">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h2>Change Address</h2>
+
+            <label>Door No, Street</label>
+            <input type="text" name="address_line1" value="{{ user.address_line_1|default:'' }}">
+
+            <label>City</label>
+            <input type="text" name="address_line2" value="{{ user.address_line_2|default:'' }}">
+
+            <label>District</label>
+            <input type="text" name="district" value="{{ user.district|default:'' }}">
+
+            <label>State</label>
+            <input type="text" name="state" value="{{ user.state|default:'' }}">
+
+            <label>Pin Number</label>
+            <input type="text" name="postal_code" value="{{ user.pin_code|default:'' }}">
+
+            <label>Phone Number</label>
+            <input type="text" name="phone" value="{{ user.phone|default:'' }}">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

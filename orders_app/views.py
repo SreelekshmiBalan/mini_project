@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Order, OrderItem
 from cart_app.models import Cart
+from user_accounts_app.models import Account
 from django.utils import timezone
 import razorpay
 from django.conf import settings
@@ -28,13 +29,37 @@ def PlaceOrder(request):
         'payment_capture': 1
     })
 
+
+    if request.user.is_authenticated:
+        profile = request.user
+        address1=profile.address_line_1
+        address2=profile.address_line_2
+        district=profile.district
+        state=profile.state
+        pincode=profile.pin_code
+        phone=profile.phone
+    else:
+        address1=""
+        address2=""
+        district=""
+        state=""
+        pincode=""
+        phone=""
+
     context = {
         'cart_items': cart_items,
         'total': total,
         'razorpay_order_id': payment['id'],
         'razorpay_key_id': settings.RAZORPAY_KEY_ID,
         'user': request.user,
+        'address1': address1,
+        'address2':address2,
+        'district':district,
+        'state':state,
+        'pincode':pincode,
+        'phone':phone
     }
+
     return render(request, 'place_order.html', context)
 
 
@@ -112,3 +137,18 @@ def my_orders(request):
         return redirect('login')
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'my_orders.html', {'orders': orders})
+
+def AddressChange(request):
+    userdata=Account.objects.get(id=request.user.id)
+    if request.method=='POST':
+        userdata.address_line_1=request.POST.get('address_line1')
+        userdata.address_line_2=request.POST.get('address_line2')
+        userdata.district=request.POST.get('district')
+        userdata.state=request.POST.get('state')
+        userdata.pin_code=request.POST.get('postal_code')
+        userdata.phone=request.POST.get('phone')
+        userdata.save()
+        return redirect('placeorder')
+    else:
+        return render(request,'address_change.html')
+

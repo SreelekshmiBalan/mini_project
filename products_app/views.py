@@ -78,6 +78,13 @@ def Shop(request):
     page_obj = paginator.get_page(page_number)
     return render(request,'shop.html',{'product':product,'page_obj': page_obj})
 
+def ShopLog(request):
+    product=Product.objects.all()
+    paginator = Paginator(product, 12)
+    page_number = request.GET.get('page') 
+    page_obj = paginator.get_page(page_number)
+    return render(request,'shop_log.html',{'product':product,'page_obj': page_obj})
+
 def Filter(request):
     product = Product.objects.all()
     category_list = Category.objects.all()
@@ -97,22 +104,26 @@ def CategoryHome(request):
     category=Category.objects.all()
     return render(request,'category_home.html',{'categories':category})
 
+def CategoryHomeLog(request):
+    category=Category.objects.all()
+    return render(request,'category_home_log.html',{'categories':category})
+
 def ShopCategory(request,pk):
     category = get_object_or_404(Category, pk=pk)
     products = Product.objects.filter(category=category)
     return render(request,'shop_by_category.html',{'category':category, 'products':products})
-    # product = Product.objects.all()
-    # category_list = Category.objects.all()
-    # category = request.GET.get('category', None)
-    # if category:
-    #     product = product.filter(category_id=category)
-    # paginator = Paginator(product.order_by('Name'), 12)
-    # page_number = request.GET.get('page', 1)
-    # page_obj = paginator.get_page(page_number)
-    # return render(request, 'shop_by_category.html', {'page_obj': page_obj,'category': category_list})
+
+def ShopCategoryLog(request,pk):
+    category = get_object_or_404(Category, pk=pk)
+    products = Product.objects.filter(category=category)
+    return render(request,'shop_by_category_log.html',{'category':category, 'products':products})
+
 
 def About(request):
     return render(request,'about.html')
+
+def AboutLog(request):
+    return render(request,'about_log.html')
 
 def SizeChart(request):
     return render(request,'size_chart.html')
@@ -121,6 +132,19 @@ def Search(request):
     query = request.GET.get('searchname')
     results = Product.objects.filter( Q(Name__icontains=query) | Q(Type__icontains=query)) if query else []
     return render(request, 'search.html', {'query': query, 'results': results})
+
+def PrivacyPolicy(request):
+    return render(request,'privacy_policy.html')
+
+def PrivacyPolicyLog(request):
+    return render(request,'privacy_policy_log.html')
+
+def Terms(request):
+    return render(request,'terms.html')
+
+def TermsLog(request):
+    return render(request,'terms_log.html')
+
 
 
 

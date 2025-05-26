@@ -173,7 +173,7 @@
         </button>
       </form>
 
-      <form method="POST" action="" id="cartForm" onsubmit="return validatelogin()">
+      <form method="POST" action="" id="cartForm" onsubmit="return validatelogin(event)">
         {% csrf_token %}
     
         <!-- Size Selection -->
@@ -216,6 +216,7 @@
           </a>
       </div>
       <div id="size-error" style="color: red; margin-top: 10px; display: none;"></div>
+      <div id="login-error-msg" style="color: red; margin-top: 10px; display: none;"></div>
       </form>
       
     
@@ -266,16 +267,17 @@ $(document).ready(function() {
     });
 });
 
-function validatelogin() {
-    if (!request.user.is_authenticated) {
-        errorDiv.textContent = "Please login to add a product to the cart";
-        errorDiv.style.display = "block";
-        return false;  
-    } else {
-        errorDiv.style.display = "none";
-        return true; 
+const isAuthenticated = {{request.user.is_authenticated|yesno:"true,false" }};
+function validatelogin(event) {
+    if (!isAuthenticated) {
+      const errorDiv = document.getElementById('login-error-msg');
+      errorDiv.textContent = "Please login to add a product to the cart";
+      errorDiv.style.display = "block";
+      event.preventDefault();  // Stop the form from submitting
+      return false;
     }
-}
+    return true; // Proceed with form submission
+  }
 // document.addEventListener('DOMContentLoaded', function () {
 //     const wishlistButton = document.querySelector('.wishlistButton');
 
