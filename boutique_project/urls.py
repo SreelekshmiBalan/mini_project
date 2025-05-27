@@ -49,6 +49,7 @@ urlpatterns = [
     path('verifyotp',user_view.verify_otp,name='verifyotp'),
     path('setnewpassword',user_view.set_new_password,name='setnewpassword'),
     path('signup',user_view.SignUp,name='signup'),
+    path('changepassword',user_view.ChangePassword,name='changepassword'),
     path('addtocart/<int:product_id>', cart_view.AddToCart, name='addtocart'),
     path('cart/', cart_view.CartView, name='cart_view'),
     path('remove-from-cart/<int:cart_item_id>/', cart_view.RemoveCart, name='remove_from_cart'),

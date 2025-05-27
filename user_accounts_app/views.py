@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from .models import Account
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 import random
 from django.core.mail import send_mail
 from django.contrib import messages
@@ -138,3 +139,20 @@ def LogoutPage(request):
     logout(request)
     return redirect('LogHome')
 
+@login_required
+def ChangePassword(request):
+    error = ""
+    userdata = Account.objects.get(id=request.user.id)
+
+    if request.method == 'POST':
+        currentpass = request.POST.get('currentpassword')
+        newpass = request.POST.get('newpassword')
+
+        if not check_password(currentpass, userdata.password):
+            error = 'Please enter current password correctly'
+        else:
+            userdata.password = make_password(newpass)
+            userdata.save()
+            return redirect('home')
+
+    return render(request, 'change_password.html', {'error': error})
